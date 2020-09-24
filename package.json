@@ -1,0 +1,15 @@
+{
+  "name": "wsi-challenge",
+  "version": "0.0.1",
+  "description": "Williams-Sonoma Coding Challenge",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "lite-server"
+  },
+  "author": "Terry Morse",
+  "license": "ISC",
+  "devDependencies": {
+    "lite-server": "^2.5.4"
+  }
+}

@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+        crossorigin="anonymous">
+
+  <title>Williams-Sonoma Coding Challenge - Terry Morse</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <link rel="stylesheet" href="./wsiprods.css">
+</head>
+<body>
+<header>
+  <h1 class="wsi-h1 text-center">Williams-Sonoma Coding Challenge - Terry
+    Morse</h1>
+</header>
+
+<main id="productsvm">
+  <div class="container-lg wsi-container" id="products-container">
+    <div v-for="product in products"
+         class="card wsi-card"
+         v-bind:key="product.id"
+    >
+      <product-img v-bind:product="product"></product-img>
+      <div class="card-body">
+        <p class="card-text" v-html="product.name"></p>
+        <p class="card-text" v-html="displayPrice(product)"></p>
+      </div>
+    </div>
+  </div>  <!-- /#products-container -->
+
+  <!-- Bootstrap modal - carousel overlay -->
+  <div class="modal fade" id="carouselModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered wsi-overlay">
+      <div class="modal-content">
+        <overlay-heading v-bind:overlay="overlay"></overlay-heading>
+        <div class="modal-body">
+          <div id="wsiCarousel"
+             class="carousel slide"
+             data-ride="carousel"
+             data-interval="5000"
+             data-wrap="true"
+          >
+            <div class="carousel-inner">
+              <div v-for="image in overlay.images" class="carousel-item">
+                <carousel-img v-bind:image="image"></carousel-img>
+              </div>
+            </div>
+
+            <carousel-control-prev
+              href="#wsiCarousel"
+              v-show="overlayHasMultipleImages"
+            ></carousel-control-prev>
+            <carousel-control-next
+              href="#wsiCarousel"
+              v-show="overlayHasMultipleImages"
+            ></carousel-control-next>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- JavaScript for Bootstrap -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script
+  src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+  integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+  crossorigin="anonymous"></script>
+<script
+  src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+  integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+  crossorigin="anonymous"></script>
+
+<script src="./prodstore.js"></script>
+<script src="./prodvm.js"></script>
+<script src="./prodpage.js"></script>
+
+</body>
+
+</html>
