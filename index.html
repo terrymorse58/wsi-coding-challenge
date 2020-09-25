@@ -12,25 +12,26 @@
         crossorigin="anonymous">
 
   <title>Williams-Sonoma Coding Challenge - Terry Morse</title>
+  <link rel="stylesheet" href="css/wsiprods.css">
   <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-  <link rel="stylesheet" href="./wsiprods.css">
 </head>
-<body>
+<body class="wsi-body">
 <header>
   <h1 class="wsi-h1 text-center">Williams-Sonoma Coding Challenge - Terry
     Morse</h1>
 </header>
 
 <main id="productsvm">
-  <div class="container-lg wsi-container" id="products-container">
+  <div id="products-container" class="container-lg wsi-container">
     <div v-for="product in products"
          class="card wsi-card"
          v-bind:key="product.id"
     >
       <product-img v-bind:product="product"></product-img>
       <div class="card-body">
-        <p class="card-text" v-html="product.name"></p>
-        <p class="card-text" v-html="displayPrice(product)"></p>
+        <product-name v-bind:name="product.name"></product-name>
+        <product-pricing v-bind:displayPrice="displayPrice(product)">
+        </product-pricing>
       </div>
     </div>
   </div>  <!-- /#products-container -->
@@ -47,11 +48,7 @@
              data-interval="5000"
              data-wrap="true"
           >
-            <div class="carousel-inner">
-              <div v-for="image in overlay.images" class="carousel-item">
-                <carousel-img v-bind:image="image"></carousel-img>
-              </div>
-            </div>
+            <carousel-inner v-bind:images="overlay.images"></carousel-inner>
 
             <carousel-control-prev
               href="#wsiCarousel"
@@ -88,5 +85,4 @@
 <script src="js/products.js"></script>
 
 </body>
-
 </html>

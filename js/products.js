@@ -59,18 +59,31 @@
     });
   }
 
+  // listen for escape key, then de-focus an active image
+  function addEscapeKeyListener () {
+    document.addEventListener('keydown', (evt) => {
+      if (evt.key !== 'Escape') { return; }
+      if ($('#carouselModal').is(':visible')) { return; }
+      if (document.activeElement) {
+        document.activeElement.blur();
+      }
+    });
+  }
+
   // add all of our event listeners
   function addEventListeners () {
     const cardsParent = document.getElementById('products-container');
     addImageClickListener(cardsParent);
     mapEnterKeysToClickEvent(cardsParent);
     addOverlayHideListener();
+    addEscapeKeyListener();
   }
 
   // initialize the page
   function pageInit () {
     addEventListeners();
 
+    // read in products and add to Vue model
     prodStore.readProducts()
       .then(result => {
         if (result !== true) {

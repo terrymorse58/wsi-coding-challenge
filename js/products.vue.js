@@ -21,7 +21,7 @@ function WSIProductsVM (vmID, overlayModalID) {
         data-dismiss="modal"
         aria-label="Close"
       ><span aria-hidden="true">&times;</span></button>`
-  })
+  });
 
   Vue.component('overlay-heading', {
     props: ['overlay'],
@@ -45,6 +45,18 @@ function WSIProductsVM (vmID, overlayModalID) {
       >`
   });
 
+  Vue.component('product-name', {
+    props: ['name'],
+    template: `
+      <p class="card-text" v-html="name"></p>`
+  });
+
+  Vue.component('product-pricing', {
+    props: ['displayprice'],
+    template: `
+      <p class="card-text" v-html="displayprice"></p>`
+  })
+
   Vue.component('carousel-img', {
     props: ['image'],
     template: `
@@ -54,6 +66,16 @@ function WSIProductsVM (vmID, overlayModalID) {
         class="img-fluid"
       >`
   });
+
+  Vue.component('carousel-inner', {
+    props: ['images'],
+    template: `
+      <div class="carousel-inner">
+        <div v-for="image in images" class="carousel-item">
+          <carousel-img v-bind:image="image"></carousel-img>
+        </div>
+      </div>`
+  })
 
   Vue.component('carousel-control-prev', {
     props: ['href'],
@@ -108,6 +130,7 @@ function WSIProductsVM (vmID, overlayModalID) {
 
       addProduct: function (product) {
         this.products.push(product);
+        return this.products.length;
       },
 
       displayPrice: function (product) {
@@ -180,7 +203,7 @@ function WSIProductsVM (vmID, overlayModalID) {
   });
 }
 
+// export module for testing purposes only
 if (typeof module !== 'undefined') {
-  console.log('products.vue.js exporting module WSIProductsVM');
   module.exports = WSIProductsVM;
 }

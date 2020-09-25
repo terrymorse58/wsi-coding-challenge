@@ -96,7 +96,7 @@ function WSIProdStore (url) {
   }
 }
 
+// export to module for testing purposes
 if (typeof module !== 'undefined') {
-  console.log('products.store.js exporting module');
   module.exports = WSIProdStore;
 }
