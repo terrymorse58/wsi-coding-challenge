@@ -4,12 +4,22 @@
   "description": "Williams-Sonoma Coding Challenge",
   "main": "index.html",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "dev": "lite-server"
   },
   "author": "Terry Morse",
   "license": "ISC",
   "devDependencies": {
-    "lite-server": "^2.5.4"
+    "babel-jest": "^26.3.0",
+    "jest": "^26.4.2",
+    "lite-server": "^2.5.4",
+    "node-fetch": "^2.6.1",
+    "vue-jest": "^3.0.7"
+  },
+  "jest": {
+    "moduleFileExtensions": ["js"],
+    "transform": {
+      "^.+\\.js$": "<rootDir>/node_modules/babel-jest"
+    }
   }
 }

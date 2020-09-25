@@ -180,3 +180,7 @@ function WSIProductsVM (vmID, overlayModalID) {
   });
 }
 
+if (typeof module !== 'undefined') {
+  console.log('products.vue.js exporting module WSIProductsVM');
+  module.exports = WSIProductsVM;
+}

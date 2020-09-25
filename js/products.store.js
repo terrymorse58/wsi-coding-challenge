@@ -42,7 +42,10 @@ function WSIProdStore (url) {
         // console.log('readProducts products:', products);
         return true;
       })
-      .catch(err => { return false; })
+      .catch(err => {
+        console.error('readProducts err:', err);
+        return false;
+      })
   }
 
   /**
@@ -70,7 +73,7 @@ function WSIProdStore (url) {
   function getVueProduct (productId) {
     const product = products[productId];
     if (typeof product === 'undefined') {
-      throw new Error(`product "${productId}" not found`);
+      return undefined;
     }
     const vueProduct = {
       id: product.id,
@@ -91,4 +94,9 @@ function WSIProdStore (url) {
     getProduct,
     getVueProduct
   }
+}
+
+if (typeof module !== 'undefined') {
+  console.log('products.store.js exporting module');
+  module.exports = WSIProdStore;
 }
