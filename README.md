@@ -72,7 +72,7 @@ npm run test
 The page layout and dimensions of the product cards are responsive to viewport
 width changes.
  
-The product carddefault width is 354 pixels, which will display 3
+The product card default width is 354 pixels, which will display 3
  columns of cards on a viewport at least 1200 pixels wide.
  
 When the viewport is 776-999 pixels wide, two columns will be
@@ -89,23 +89,23 @@ On viewports narrower than 396 pixels, the product cards shrink in size
 ![accessibility](https://terrymorse.com/public/wsicc-accessibility.gif
  "accessibility design")
 
-To permit page navigtion without a pointing device, navigation may be
- accmplished using `tab`, `enter`, and `esc` keys.
+To permit page navigtion without a pointing device, navigation is
+ supported using `tab`, `enter`, and `esc` keys.
 
 Pressing `tab` key sets the focus on the next product card's image, and an
  outline indicates which card image has focus. Pressing `esc` removes
  focus from the product image.
 
-When a product card's image has focus, the `enter` key opens the product
- overlay containing an images carousel.
+When a product card's image has focus, the `enter` key opens an
+ overlay which displays a carousel of product images.
  
-When an image carousel is displayed, `esc` closes the overlay and returns
+When the overlay is displayed, `esc` closes it and returns
  focus to the product card image.
 
 #### Styling ####
 
-Styling is set in `wsiprods.css`. To make it easy to change the look and feel,
-this file contains CSS custom properties (variables) for all the significant
+Styling is set in `wsiprods.css`. To permit easy changes to the apperance,
+this file uses CSS custom properties (variables) for all the significant
  styles:
   
 ```css
@@ -128,3 +128,16 @@ body {
   --wsi-overlay-max-width: 400px;
 }
 ```
+
+#### Testimonial ####
+
+This project was written entirely by me, Terry Morse, without outside
+ assistance. I welcome comments or questions at
+[tmorse@terrymorse.com](mailto:tmorse@terrymorse.com "Terry Morse email
+ address").
+ 
+ Terry Morse<br>
+ President<br>
+ Terry Morse Software, Inc.<br>
+ Palo Alto, California, USA<br>
+ [tmorse@terrymorse.com](mailto:tmorse@terrymorse.com)
