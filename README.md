@@ -1,16 +1,20 @@
 # Williams-Sonoma Coding Challenge #
 
-![3-column layout](https://terrymorse.com/public/wscc-3-column.png "3-column
- layout")
+## Project ##
 
-## Task ##
-
-Given a JSON object of products, build a responsive page that displays for each
+Given a JSON file of products, build a page that displays for each
  product:
 
 * product image
 * product name
 * product price
+
+Display all products on a multi-column, responsive, accessible, and attractive
+ page. Upon selection of a product image, display an overlay containing a
+  carousel of product images.
+  
+![3-column layout](https://terrymorse.com/public/wscc-3-column.png "3-column
+   layout")
 
 
 ### Technologies Used ###
@@ -34,19 +38,19 @@ This project is installed on the Terry Morse Software, Inc. server and my be run
  
 [WSI Coding Challenge @ terrymorse.com](https://terrymorse.com/private/wsicodechallenge/index.html)
 
-Or it can be run locally:
+Or it can be run locally using lite-server, which was installed above:
 ```bash
 npm run dev
 ```
 
-#### Running Test ####
+#### Tests ####
 ```bash
 npm run test
 ```
 
 #### Directory Structure ####
 ```bash
- wsi-coding-challenge
+ Project
  |-- index.html
  |-- css
  |   |-- wsiprods.css
@@ -55,9 +59,8 @@ npm run test
  |   |-- products.store.js
  |   |-- products.store.test.js
  |   |-- products.vue.js
- |   |== products.vue.test.js
+ |   |-- products.vue.test.js
 ```
-
 
 #### Responsive Design ####
 
@@ -66,41 +69,44 @@ npm run test
  layout")
 
 
-The layout and dimensions of the product cards are responsive to the viewport
- width.
+The page layout and dimensions of the product cards are responsive to viewport
+width changes.
  
-The product cards have a default width of 354 pixels, which will display 3
+The product carddefault width is 354 pixels, which will display 3
  columns of cards on a viewport at least 1200 pixels wide.
  
- When the viewport is 776-999 pixels wide, two columns will be
+When the viewport is 776-999 pixels wide, two columns will be
   displayed. 
  
-On viewports narrower than 776 pixels, the layout switches to single-column, horizontally centered product cards.
+On viewports narrower than 776 pixels, the layout changes to single-column,
+horizontally centered product cards.
  
- On viewports narrower than 396 pixels, the product cards shrink in size
-  to fit the viewport width.
+On viewports narrower than 396 pixels, the product cards shrink in size
+ to fit the viewport width.
 
 ### Accessibility Design ###
 
 ![accessibility](https://terrymorse.com/public/wsicc-accessibility.gif
  "accessibility design")
 
-It is possible to navigation through the page without a pointing device.
+To permit page navigtion without a pointing device, navigation may be
+ accmplished using `tab`, `enter`, and `esc` keys.
 
-Pressing `tab` key will set the focus on the next product card's image.
+Pressing `tab` key sets the focus on the next product card's image, and an
+ outline indicates which card image has focus. Pressing `esc` removes
+ focus from the product image.
 
-Once a product card's image has focus, pressing the `enter` key will open the
- overlay with a carousel of that product's images.
+When a product card's image has focus, the `enter` key opens the product
+ overlay containing an images carousel.
  
-Pressing `esc` closes the overlay and returns focus to the product card image.
- 
-Pressing `esc` a second time removes focus from the product card image.
+When an image carousel is displayed, `esc` closes the overlay and returns
+ focus to the product card image.
 
 #### Styling ####
 
-The page styling is set in `wsiprods.css`. To enable
- easy changes to the appearance of the product cards, this file uses CSS custom
-  properties (variables) for all the significant styles:
+Styling is set in `wsiprods.css`. To make it easy to change the look and feel,
+this file contains CSS custom properties (variables) for all the significant
+ styles:
   
 ```css
 /* modify wsi styling here */
