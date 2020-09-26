@@ -1,7 +1,5 @@
 # Williams-Sonoma Coding Challenge #
 
-## Project ##
-
 Given a JSON file of products, build a page that displays for each
  product:
 
@@ -33,8 +31,8 @@ npm install
 ```
 #### Launching the Page ###
 
-This project is installed on the Terry Morse Software, Inc. server and my be run
- here:
+This project is installed on the Terry Morse Software, Inc. server and may
+be run here:
  
 [WSI Coding Challenge @ terrymorse.com](https://terrymorse.com/private/wsicodechallenge/index.html)
 
