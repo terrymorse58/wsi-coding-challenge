@@ -29,5 +29,9 @@
       "^.+\\.js$": "<rootDir>/node_modules/babel-jest"
     }
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/terrymorse58/williams-sonoma-coding-challenge.git"
+  },
   "dependencies": {}
 }

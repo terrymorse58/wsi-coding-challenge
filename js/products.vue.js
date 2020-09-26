@@ -86,9 +86,7 @@ function WSIProductsVM (vmID, overlayModalID) {
         role="button"
         data-slide="prev"
       >
-        <span
-          class="carousel-control-prev-icon"
-          aria-hidden="true"></span>
+        <span class="carousel-control-prev-icon"></span>
         <span class="sr-only">Previous</span>
       </a>`
   });
@@ -102,9 +100,7 @@ function WSIProductsVM (vmID, overlayModalID) {
         role="button"
         data-slide="next"
       >
-        <span
-          class="carousel-control-next-icon"
-          aria-hidden="true"></span>
+        <span class="carousel-control-next-icon"></span>
         <span class="sr-only">Next</span>
       </a>`
   });
