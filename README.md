@@ -49,7 +49,7 @@ npm run test
 ```
 
 #### Directory Structure ####
-```bash
+```text
  Project
  |-- index.html
  |-- css
@@ -132,7 +132,9 @@ body {
 #### Testimonial ####
 
 This project was written entirely by me, Terry Morse, without outside
- assistance. I welcome comments or questions at
+ assistance.
+ 
+Your comments or questions are welcome at
 [tmorse@terrymorse.com](mailto:tmorse@terrymorse.com "Terry Morse email
  address").
  
