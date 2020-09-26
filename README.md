@@ -1,15 +1,17 @@
 # Williams-Sonoma Coding Challenge #
 
+![3-column layout](https://terrymorse.com/public/wscc-3-column.png "3-column
+ layout")
+
 ## Task ##
 
-Given a JSON object of products, build a page that displays for each product:
+Given a JSON object of products, build a responsive page that displays for each
+ product:
 
 * product image
 * product name
 * product price
 
-![3-column layout](https://terrymorse.com/public/wscc-3-column.png "3-column
- layout")
 
 ### Technologies Used ###
 
@@ -18,7 +20,31 @@ Given a JSON object of products, build a page that displays for each product:
 * Jest 26.4.2
 * vue-jest 3.0.7
 
+#### Installation ####
+
+```bash
+git clone https://github.com/terrymorse58/wsi-coding-chalenge.git
+cd wsi-coding-chalenge
+npm install
+```
+#### Opening Page ###
+```bash
+npm run dev
+```
+Or launch on server
+[terrymorse.com](https://terrymorse.com/private/wsicodechallenge/index.html)
+
+#### Running Test ####
+```bash
+npm run test
+```
+
 ### Responsive Design ###
+
+![iPhone responsive layout](https://terrymorse.com/public/wsicc-iphone.png "3
+-column
+ layout")
+
 
 The layout and dimensions of the products cards are responsive to the viewport
  width.
