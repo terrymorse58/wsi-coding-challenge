@@ -2,7 +2,7 @@
 import {
   mockFetchToProducts,
   unMockFetch } from './products.mock';
-import WSIProdStore  from './products.store';
+import WSIProdStore  from '../js/products.store';
 
 test('import WSIProdStore from products.store.js', () => {
   expect(WSIProdStore).toBeDefined();

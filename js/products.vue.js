@@ -199,7 +199,5 @@ function WSIProductsVM (vmID, overlayModalID) {
   });
 }
 
-// export module for testing purposes only
-if (typeof module !== 'undefined') {
-  module.exports = WSIProductsVM;
-}
+export default WSIProductsVM;
+

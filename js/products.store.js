@@ -96,7 +96,4 @@ function WSIProdStore (url) {
   }
 }
 
-// export to module for testing purposes
-if (typeof module !== 'undefined') {
-  module.exports = WSIProdStore;
-}
+export default WSIProdStore;

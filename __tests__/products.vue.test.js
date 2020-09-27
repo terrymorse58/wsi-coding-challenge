@@ -1,6 +1,9 @@
-// Import the `mount()` method from Vue Test Utils
+// test of products.vue.js
+
 import Vue from 'vue/dist/vue.js';
-import WSIProductsVM from './products.vue';
+global.Vue = Vue;
+
+import WSIProductsVM from '../js/products.vue.js';
 import {
   addMockDomToDocument,
   mockVueProduct,
@@ -13,7 +16,6 @@ const oneVueProduct = mockVueProduct();
 test(`import Vue from 'vue/dist/vue.js'`, () => {
   expect(Vue).toBeDefined();
 });
-global.Vue = Vue;
 
 // did WSIProductsVM mount?
 test(`import WSIProductsVM from './products.vue'`, () => {

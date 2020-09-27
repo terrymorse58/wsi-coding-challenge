@@ -55,9 +55,7 @@ npm run test
  |-- js
  |   |-- products.js
  |   |-- products.store.js
- |   |-- products.store.test.js
  |   |-- products.vue.js
- |   |-- products.vue.test.js
 ```
 
 #### Responsive Design ####
