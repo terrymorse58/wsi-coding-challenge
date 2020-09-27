@@ -5,25 +5,36 @@
   "main": "index.html",
   "scripts": {
     "test": "jest",
-    "dev": "lite-server"
+    "dev": "lite-server",
+    "webpack": "webpack",
+    "build": "bash build.sh"
   },
   "author": "Terry Morse",
   "license": "ISC",
   "devDependencies": {
+    "@babel/cli": "^7.11.6",
+    "@babel/core": "^7.11.6",
     "@babel/preset-env": "^7.11.5",
     "@vue/test-utils": "^1.1.0",
     "babel-jest": "^26.3.0",
+    "babel-loader": "^8.1.0",
     "jest": "^26.4.2",
     "lite-server": "^2.5.4",
     "node-fetch": "^2.6.1",
     "vue": "^2.6.12",
     "vue-jest": "^3.0.7",
-    "vue-template-compiler": "^2.6.12"
+    "vue-template-compiler": "^2.6.12",
+    "webpack": "^4.44.2",
+    "webpack-cli": "^3.3.12"
   },
   "jest": {
     "verbose": true,
-    "moduleFileExtensions": ["js"],
-    "modulePathIgnorePatterns": ["products.mock.js"],
+    "moduleFileExtensions": [
+      "js"
+    ],
+    "modulePathIgnorePatterns": [
+      "products.mock.js"
+    ],
     "transform": {
       "^.+\\.js$": "<rootDir>/node_modules/babel-jest"
     }

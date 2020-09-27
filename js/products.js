@@ -102,6 +102,4 @@ function initPageOnWindowLoad () {
 
 initPageOnWindowLoad();
 
-export {
-  pageInit
-};
+export default pageInit;
