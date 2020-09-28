@@ -1,6 +1,6 @@
 
 /* modify wsi styling here */
-body {
+:root {
   --wsi-body-background-color: #f0f0f0;
   --wsi-container-background-color: #fff;
   --wsi-container-outline: 1px solid #bbb;

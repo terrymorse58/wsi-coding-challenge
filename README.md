@@ -15,12 +15,18 @@ Display all products on a multi-column, responsive, accessible, and attractive
    layout")
 
 
-### Technologies Used ###
+#### Technologies ####
 
-* Vue.js 2.6.12
-* Bootstrap 4.5.2
-* Jest 26.4.2
-* vue-jest 3.0.7
+ Name      | Version | Usage
+---------- | ------- | -----
+ Vue.js    | 2.6.12  | production
+ Bootstrap | 4.5.2   | production
+ jQuery    | 3.5.1   | production
+ popper.js | 1.16.1  | production 
+ jest      | 26.4.2  | test
+ babel     | 7.11.6  | test, build
+ webpack   | 4.44.2  | build
+ postCSS   | 8.1.0   | build
 
 #### Installation ####
 
@@ -31,31 +37,32 @@ npm install
 ```
 #### Launching the Page ###
 
-This project is installed on the Terry Morse Software, Inc. server and may
+This project build is installed on the Terry Morse Software, Inc. server and may
 be run here:
  
 [WSI Coding Challenge @ terrymorse.com](https://terrymorse.com/private/wsicodechallenge/index.html)
 
-Or it can be run locally using lite-server, which was installed above:
-```bash
+Or the development version can be run locally using lite-server, which was
+ installed above:
+```text
 npm run dev
 ```
 
 #### Tests ####
-```bash
+```text
 npm run test
 ```
 
 #### Directory Structure ####
 ```text
  Project
- |-- index.html
- |-- css
- |   |-- wsiprods.css
- |-- js
- |   |-- products.js
- |   |-- products.store.js
- |   |-- products.vue.js
+ |-- build
+ |   |-- index.html
+ |   |-- wsi-products.json
+ |   |-- css
+ |   |   |-- wsiprods.css
+ |   |-- js
+ |   |   |-- products.js
 ```
 
 #### Responsive Design ####
@@ -80,7 +87,7 @@ horizontally centered product cards.
 On viewports narrower than 396 pixels, the product cards shrink in size
  to fit the viewport width.
 
-### Accessibility Design ###
+#### Accessibility Design ####
 
 ![accessibility](https://terrymorse.com/public/wsicc-accessibility.gif
  "accessibility design")
