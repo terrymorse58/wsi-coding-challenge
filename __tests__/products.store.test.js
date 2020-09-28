@@ -15,13 +15,14 @@ test('construct WSIProdStore instance', () => {
   expect(prodStore).toBeDefined();
 });
 
-test('WSIProdStore readProducts() returns true',
-  async (done) => {
-    mockFetchToProducts();
-    const result = await prodStore.readProducts();
-    expect(result).toBe(true);
-    unMockFetch();
-    done();
+test('WSIProdStore readProducts() returns true',() => {
+  expect.assertions(1);
+  mockFetchToProducts();
+  return prodStore.readProducts()
+    .then(result => {
+      unMockFetch();
+      expect(result).toBe(true);
+    });
   });
 
 test('WSIProdStore productIds() returns array of length 10', () => {

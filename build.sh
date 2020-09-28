@@ -1,21 +1,33 @@
 #!/usr/bin/env bash
-echo "Building project to build folder."
 #
+# Build for Williams-Sonoma Coding Challenge
+#
+echo "Creating wsi-challenge build folder..."
+#
+# for browser compatibility, remove `type="module"` from `<script>`
 echo " "
-echo "Removing 'module' script call from index.html and copying to build folder:"
+echo -n "Removing 'type=\"module\"' from index.html <script> tag ..."
 sed 's/ type="module">/>/' index.html > build/index.html
+echo " done."
+#
 #
 echo " "
-echo "Copying json input file to build folder:"
+echo "Copying company-supplied products JSON to build folder:"
 cp -v wsi-products.json build/wsi-products.json
+echo "Done."
+#
 #
 echo " "
-echo "Converting with PostCSS to 'build/css/wsiprods.css':"
+echo "Converting CSS file for browser compatibility with postcss:"
 postcss css/wsiprods.css --output build/css/wsiprods.css --verbose
+echo "Done."
+#
 #
 echo " "
-echo "Building products.js with webpack/babel:"
+echo "Building bundled and compatible 'products.js' with webpack/babel:"
 webpack
+echo "Done."
+#
 #
 echo " "
 echo "Build complete."
