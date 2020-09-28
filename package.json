@@ -1,6 +1,6 @@
 {
   "name": "wsi-challenge",
-  "version": "0.0.1",
+  "version": "1.0.1",
   "description": "Williams-Sonoma Coding Challenge",
   "main": "index.html",
   "scripts": {
