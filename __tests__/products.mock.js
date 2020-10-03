@@ -24,30 +24,6 @@ const mockBody =
       </div>
     </div>
   </div>
-  <div class="modal fade" id="carouselModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered wsi-overlay">
-      <div class="modal-content">
-        <overlay-heading v-bind:overlay="overlay"></overlay-heading>
-        <div class="modal-body">
-          <div id="wsiCarousel"
-             class="carousel slide"
-             data-ride="carousel"
-             data-interval="5000"
-             data-wrap="true">
-            <carousel-inner v-bind:images="overlay.images"></carousel-inner>
-            <carousel-control-prev
-              href="#wsiCarousel"
-              v-show="overlayHasMultipleImages"
-            ></carousel-control-prev>
-            <carousel-control-next
-              href="#wsiCarousel"
-              v-show="overlayHasMultipleImages"
-            ></carousel-control-next>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 </main>`;
 
 function addMockDomToDocument () {

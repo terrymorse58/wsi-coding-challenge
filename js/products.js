@@ -1,11 +1,14 @@
 // products page for Williams-Sonoma Coding Challenge
 import WSIProdStore from './products.store.js';
 import WSIProductsVM from './products.vue.js';
+import OverlayCarousel from
+    '../node_modules/bootstrap-carousel-modal/carousel.js';
+let carousel;
 
 const JSON_FILE_NAME = 'wsi-products.json';
 const PRODUCTS_URL = productsJsonUrl(JSON_FILE_NAME);
 const prodStore = new WSIProdStore(PRODUCTS_URL);
-const prodVM = WSIProductsVM('productsvm', 'carouselModal');
+const prodVM = WSIProductsVM('productsvm');
 
 // forn the URL to the products json file
 // assumption: json file is stored in same path as web page
@@ -25,7 +28,9 @@ function handleProductClick (evt) {
     return;
   }
   const thisProduct = prodStore.getProduct(target.dataset.id);
-  prodVM.showOverlay(thisProduct.name, thisProduct.images);
+  const imgHrefs = thisProduct.images.map((image) => image.href);
+  carousel.populate(thisProduct.name, imgHrefs);
+  carousel.show();
 }
 
 // add all products in prodstore to Vue model
@@ -52,10 +57,10 @@ function addImageClickListener (cardsParent) {
   cardsParent.addEventListener('click', handleProductClick);
 }
 
-// listen for hiding of overlay modal
+// respond to hiding of overlay modal
 function addOverlayHideListener () {
   $('#carouselModal').on('hidden.bs.modal', () => {
-    prodVM.hideOverlay();
+    // no cleanup needed
   });
 }
 
@@ -81,6 +86,7 @@ function addEventListeners () {
 
 // initialize the page
 function pageInit () {
+
   addEventListeners();
 
   // read in products and add to Vue model
@@ -96,6 +102,11 @@ function pageInit () {
 
 function initPageOnWindowLoad () {
   window.addEventListener('load', () => {
+    // install the overlay carousel
+    carousel = new OverlayCarousel({
+      thumbnailHoverOutline: '2px solid dodgerblue'
+    });
+
     pageInit();
   });
 }

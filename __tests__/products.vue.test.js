@@ -23,7 +23,7 @@ test(`import WSIProductsVM from './products.vue'`, () => {
 });
 
 // create instance of WSIProductsVM
-const prodVM = WSIProductsVM('productsvm', 'carouselModal');
+const prodVM = WSIProductsVM('productsvm');
 test('create instance of WSIProductsVM', () => {
   expect(prodVM).toBeDefined();
 });
@@ -48,10 +48,4 @@ test('display price', () => {
   expect(typeof result).toBe('string');
   expect(result.length).toBeGreaterThan(0);
   expect(resultTrimmed.localeCompare(expected)).toEqual(0);
-});
-
-// test overlayHasMultipleImages
-test('overlayHasMultipleImages is false', () => {
-  const hasMultiple = prodVM.overlayHasMultipleImages;
-  expect(hasMultiple).toBe(false);
 });
