@@ -15,18 +15,21 @@ Display all products on a multi-column, responsive, accessible, and attractive
    layout")
 
 
-#### Technologies ####
+#### Technology Dependencies ####
 
- Name      | Version | Usage
----------- | ------- | -----
- Vue.js    | 2.6.12  | production
- Bootstrap | 4.5.2   | production
- jQuery    | 3.5.1   | production
- popper.js | 1.16.1  | production 
- jest      | 26.4.2  | test
- babel     | 7.11.6  | test, build
- webpack   | 4.44.2  | build
- postCSS   | 8.1.0   | build
+ Name                      | Version | Usage
+-------------------------- | ------- | -----
+ Vue.js                    | 2.6.12  | production
+ Bootstrap                 | 4.5.2   | production
+ jQuery                    | 3.5.1   | production
+ popper.js                 | 1.16.1  | production 
+ bootstrap-carousel-modal* | 1.1.3   | production
+ jest                      | 26.4.2  | test
+ babel                     | 7.11.6  | test, build
+ webpack                   | 4.44.2  | build
+ postCSS                   | 8.1.0   | build
+ 
+* – an internally developed package
 
 #### Installation ####
 
