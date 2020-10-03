@@ -86,351 +86,6 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./js/carousel/CSSEditableProps.js":
-/*!*****************************************!*\
-  !*** ./js/carousel/CSSEditableProps.js ***!
-  \*****************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-// editable css props for carousel modal
-var CSSEditableProps = {
-  maxWidth: {
-    property: 'max-width',
-    value: '400px'
-  },
-  headerPadding: {
-    property: 'padding',
-    value: '0.25rem 1rem'
-  },
-  headerParagraphMargin: {
-    property: 'margin',
-    value: '0'
-  },
-  footerPadding: {
-    property: 'padding',
-    value: '0 1rem'
-  },
-  thumbnailHeight: {
-    property: 'height',
-    value: '60px'
-  },
-  thumbnailMargin: {
-    property: 'margin',
-    value: '0 8px'
-  },
-  thumbnailBorder: {
-    property: 'border',
-    value: '1px solid rgba(0,0,0,.125)'
-  },
-  thumbnailHoverOutline: {
-    property: 'outline',
-    value: '2px solid #aaa'
-  },
-  thumbnailSelectedOpacity: {
-    property: 'opacity',
-    value: '50%'
-  },
-  thumbnailSelectedFilter: {
-    property: 'filter',
-    value: 'grayscale(100%) blur(1px)'
-  }
-};
-/* harmony default export */ __webpack_exports__["default"] = (CSSEditableProps);
-
-/***/ }),
-
-/***/ "./js/carousel/CSSTemplate.js":
-/*!************************************!*\
-  !*** ./js/carousel/CSSTemplate.js ***!
-  \************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-// css template for carousel modal
-var CSSTemplate = "\n    .wsi-overlay {\n      {{maxWidth}}\n    }\n\n    .wsi-overlay .modal-header {\n      {{headerPadding}}\n    }\n\n    .wsi-overlay .modal-header p {\n      {{headerParagraphMargin}}\n    }\n\n    .wsi-overlay .modal-footer {\n      {{footerPadding}}\n    }\n\n    .wsi-overlay .div-thumbnails {\n      overflow-x: auto;\n      white-space: nowrap;\n      padding: 0.5rem 0 1rem 0;\n      background-color: transparent;\n    }\n    \n    .wsi-overlay .div-thumbnails img {\n      {{thumbnailHeight}}\n      width: auto;\n      {{thumbnailMargin}}\n      {{thumbnailBorder}}\n    }\n\n    .wsi-overlay .div-thumbnails img:hover {\n      {{thumbnailHoverOutline}}\n    }\n\n    .wsi-overlay .div-thumbnails img.selected {\n      cursor: default;\n      outline: none;\n      {{thumbnailSelectedOpacity}}\n      {{thumbnailSelectedFilter}}\n    }\n";
-/* harmony default export */ __webpack_exports__["default"] = (CSSTemplate);
-
-/***/ }),
-
-/***/ "./js/carousel/carousel.js":
-/*!*********************************!*\
-  !*** ./js/carousel/carousel.js ***!
-  \*********************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _CSSTemplate_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CSSTemplate.js */ "./js/carousel/CSSTemplate.js");
-/* harmony import */ var _CSSEditableProps_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CSSEditableProps.js */ "./js/carousel/CSSEditableProps.js");
-/* harmony import */ var _htmltemplate_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./htmltemplate.js */ "./js/carousel/htmltemplate.js");
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-// carousel overlay modal
-
-
-
-
-function OverlayCarousel(userEditsToCSSProps) {
-  // console.log('OverlayCarousel userEditsToCSSProps:', userEditsToCSSProps);
-  var css = _CSSTemplate_js__WEBPACK_IMPORTED_MODULE_0__["default"].slice(0);
-  var cssEdProps = JSON.parse(JSON.stringify(_CSSEditableProps_js__WEBPACK_IMPORTED_MODULE_1__["default"])); // apply passed in user edits to css props
-
-  function applyUserEditsToCSSProps() {
-    // console.log('applyUserEditsToCSSProps()');
-    if (typeof userEditsToCSSProps === 'undefined') {
-      return;
-    }
-
-    for (var _i = 0, _Object$entries = Object.entries(userEditsToCSSProps); _i < _Object$entries.length; _i++) {
-      var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
-          propName = _Object$entries$_i[0],
-          value = _Object$entries$_i[1];
-
-      if (typeof cssEdProps[propName] === 'undefined') {
-        continue;
-      }
-
-      cssEdProps[propName].value = value;
-    }
-  } // apply all css props to css
-
-
-  function applyCSSPropsToCSS() {
-    for (var _i2 = 0, _Object$entries2 = Object.entries(cssEdProps); _i2 < _Object$entries2.length; _i2++) {
-      var _Object$entries2$_i = _slicedToArray(_Object$entries2[_i2], 2),
-          propName = _Object$entries2$_i[0],
-          prop = _Object$entries2$_i[1];
-
-      var searchStr = "{{".concat(propName, "}}");
-      var subStr = "".concat(prop.property, ": ").concat(prop.value, ";");
-      css = css.replace(searchStr, subStr);
-    }
-  } // append HTML template to end of <body>
-
-
-  function appendTemplateToBody() {
-    var div = document.createElement('div');
-    div.id = "carousel-modal-container";
-    div.innerHTML = _htmltemplate_js__WEBPACK_IMPORTED_MODULE_2__["default"];
-    document.body.appendChild(div); // listen for carousel changes then update the DOM
-
-    $('.carousel').on('slide.bs.carousel', function (evt) {
-      var carouselIndex = Number(evt.relatedTarget.getAttribute('data-index')); // get all the thumbnail images
-
-      var thumbImgs = getAllThumbnails(); // set (unset) the selected class for each thumbnail image
-
-      var thumbSelected = updateThumbnailsSelectedClass(thumbImgs, carouselIndex); // scroll the thumbnails container
-
-      scrollThumbnailsContainer(thumbSelected);
-    });
-  } // append style sheet to <head>
-
-
-  function appendCSSToHead() {
-    var style = document.createElement('style');
-    style.innerHTML = css;
-    document.head.appendChild(style);
-  } // populate overlay with name, carousel and thumbnail images
-
-
-  function populate(name, hrefs) {
-    var pHeader = document.querySelector('.wsi-overlay .modal-header p');
-    var carouselInner = document.querySelector('.wsi-overlay .carousel-inner');
-    var thumbnails = document.querySelector('.wsi-overlay .div-thumbnails');
-    pHeader.innerHTML = name; // populate the carousel and the thumbnails
-
-    carouselInner.innerHTML = '';
-    thumbnails.innerHTML = '';
-    hrefs.forEach(function (href, index) {
-      var carouselItem = document.createElement('div');
-      carouselItem.className = 'carousel-item';
-
-      if (index === 0) {
-        carouselItem.classList.add('active');
-      }
-
-      carouselItem.dataset.index = index;
-      carouselInner.appendChild(carouselItem);
-      var img = document.createElement('img');
-      img.src = href;
-      img.alt = name;
-      img.className = 'img-fluid';
-      carouselItem.appendChild(img);
-      var imgThumb = document.createElement('img');
-      imgThumb.role = 'button';
-      imgThumb.dataset.index = index;
-      imgThumb.src = href;
-      thumbnails.appendChild(imgThumb);
-    }); // show thumbnails if there are multiple images
-
-    var footer = document.querySelector('.wsi-overlay .modal-footer');
-    var hasMultipleImages = hrefs.length > 1;
-    footer.style.display = hasMultipleImages ? '' : 'none';
-  } // show the carousel modal
-
-
-  function show() {
-    $('#carouselModal').modal('show'); // mark the first thumbnail image as selected
-
-    var firstThumb = document.querySelector('.div-thumbnails img');
-
-    if (firstThumb === null) {
-      console.error('no thumbnail images found');
-      return;
-    }
-
-    firstThumb.classList.add('selected'); //display the first image
-
-    displaySelectedImage(firstThumb); // listen for thumbnail clicks
-
-    listenForThumbnailClicks();
-  } // display in carousel the selected thumbnail image
-
-
-  function displaySelectedImage(thumbnailImg) {
-    var imgIndex = Number(thumbnailImg.getAttribute('data-index'));
-    $('.carousel').carousel(imgIndex);
-  } // respond to clicks on thumbnail images inside 'div-thumbnails'
-
-
-  function listenForThumbnailClicks() {
-    var divThumbnails = document.querySelector('.div-thumbnails');
-    divThumbnails.addEventListener('click', function (evt) {
-      var elClicked = evt.target;
-
-      var isThumbnailImg = function isThumbnailImg(el) {
-        return el.tagName === 'IMG' && typeof el.dataset.index !== 'undefined';
-      };
-
-      if (isThumbnailImg(elClicked) === false) {
-        return;
-      }
-
-      displaySelectedImage(elClicked);
-    });
-  } // get all thumbnail images
-
-
-  function getAllThumbnails() {
-    return Array.from(document.querySelectorAll('.div-thumbnails img'));
-  } // update the "selected" class of all thumbnails
-
-
-  function updateThumbnailsSelectedClass(thumbnails, carouselIndex) {
-    var thumbSelected = null;
-    thumbnails.forEach(function (img) {
-      var thumbIndex = Number(img.getAttribute('data-index'));
-      img.classList.remove('selected');
-
-      if (thumbIndex === carouselIndex) {
-        thumbSelected = img;
-      }
-    });
-
-    if (thumbSelected) {
-      thumbSelected.classList.add('selected');
-    }
-
-    return thumbSelected;
-  }
-  /**
-   * scroll the thumbnails container left or right, based on the selected
-   * thumbnail's position
-   * @param {Element} thumb
-   */
-
-
-  function scrollThumbnailsContainer(thumb) {
-    if (!thumb) {
-      return;
-    }
-
-    var divThumb = document.querySelector('.div-thumbnails');
-    var divMidpoint = Math.round(divThumb.clientWidth / 2);
-    var divScroll = divThumb.scrollLeft;
-    var tStyle = window.getComputedStyle(thumb);
-    var tTotalWidth = thumb.offsetWidth + parseFloat(tStyle.marginLeft) + parseFloat(tStyle.marginRight);
-    var thumbCenter = thumb.offsetLeft + thumb.offsetWidth / 2;
-    var centerOffset = thumbCenter - divScroll; // if thumbnail is centered, do not scroll
-
-    var thumbnailIsCentered = function thumbnailIsCentered() {
-      return centerOffset >= divMidpoint - tTotalWidth / 2 && centerOffset <= divMidpoint + tTotalWidth / 2;
-    };
-
-    if (thumbnailIsCentered()) {
-      return;
-    }
-
-    var scrollAmount = Math.sign(centerOffset - divMidpoint) * tTotalWidth; // console.log(`  divScroll: ${divScroll}, thumbCenter: ${thumbCenter}, ` +
-    // ` centerOffset: ${centerOffset}, scrollAmount: ${scrollAmount}`);
-
-    var divThumbnails = $('.div-thumbnails');
-
-    if (divThumbnails.animate) {
-      // console.log('scrollThumbnailsContainer using animate()');
-      divThumbnails.animate({
-        scrollLeft: divThumb.scrollLeft + scrollAmount
-      }, 500);
-    } else if (divThumbnails.scrollLeft) {
-      // console.log('scrollThumbnailsContainer using scrollLeft()');
-      divThumbnails.scrollLeft(divThumb.scrollLeft + scrollAmount);
-    } else {
-      console.log('scrollThumbnailsContainer using fallback scroll()');
-      divThumbnails.scroll(divThumb.scrollLeft + scrollAmount, 0);
-    }
-  }
-
-  function init() {
-    // console.log('carousel.js init()');
-    applyUserEditsToCSSProps();
-    applyCSSPropsToCSS();
-    appendTemplateToBody();
-    appendCSSToHead();
-  } // initialize
-
-
-  init();
-  return {
-    populate: populate,
-    show: show
-  };
-}
-
-/* harmony default export */ __webpack_exports__["default"] = (OverlayCarousel);
-
-/***/ }),
-
-/***/ "./js/carousel/htmltemplate.js":
-/*!*************************************!*\
-  !*** ./js/carousel/htmltemplate.js ***!
-  \*************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-// HTML template for carousel modal
-var HTMLTemplate = "\n  <div\n    id=\"carouselModal\"\n    tabindex=\"-1\"\n    class=\"modal fade\"\n    aria-modal=\"true\"\n    role=\"dialog\"\n    data-wrap=\"false\"\n  >\n    <div class=\"modal-dialog modal-dialog-centered wsi-overlay\">\n      <div class=\"modal-content\">\n        <div class=\"modal-header\"><p><!-- name of product --></p>\n          <button type=\"button\" data-dismiss=\"modal\" aria-label=\"Close\"\n                  class=\"close\"><span aria-hidden=\"true\">\xD7</span></button>\n        </div>\n        <div class=\"modal-body\">\n          <div\n            id=\"wsiCarousel\"\n            data-ride=\"carousel\"\n            class=\"carousel slide carousel-fade\"\n            data-interval=\"false\"\n          >\n            <div class=\"carousel-inner\">\n            <!--\n              <div class=\"carousel-item active\" data-index=\"0\">\n                <img src=\"...\" alt=\"...\" class=\"img-fluid\">\n              </div>\n            -->\n            </div>\n          </div> <!-- /.carousel -->\n        </div> <!-- /.modal-body -->\n\n        <div class=\"modal-footer\">\n          <div class=\"div-thumbnails\">\n          <!--\n            <img role=\"button\"\n              data-index=\"0\"\n              onclick=\"displaySelectedImage(this)\"\n              src=\"...\">\n          -->\n          </div>\n        </div> <!-- /.modal-footer -->\n      </div> <!-- /.modal-content -->\n    </div> <!-- /.modal-dialog -->\n  </div> <!-- /.modal -->\n";
-/* harmony default export */ __webpack_exports__["default"] = (HTMLTemplate);
-
-/***/ }),
-
 /***/ "./js/products.js":
 /*!************************!*\
   !*** ./js/products.js ***!
@@ -442,7 +97,7 @@ var HTMLTemplate = "\n  <div\n    id=\"carouselModal\"\n    tabindex=\"-1\"\n   
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _products_store_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./products.store.js */ "./js/products.store.js");
 /* harmony import */ var _products_vue_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./products.vue.js */ "./js/products.vue.js");
-/* harmony import */ var _carousel_carousel_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./carousel/carousel.js */ "./js/carousel/carousel.js");
+/* harmony import */ var _node_modules_bootstrap_carousel_modal_carousel_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../node_modules/bootstrap-carousel-modal/carousel.js */ "./node_modules/bootstrap-carousel-modal/carousel.js");
 // products page for Williams-Sonoma Coding Challenge
 
 
@@ -554,7 +209,7 @@ function pageInit() {
 function initPageOnWindowLoad() {
   window.addEventListener('load', function () {
     // install the overlay carousel
-    carousel = new _carousel_carousel_js__WEBPACK_IMPORTED_MODULE_2__["default"]({
+    carousel = new _node_modules_bootstrap_carousel_modal_carousel_js__WEBPACK_IMPORTED_MODULE_2__["default"]({
       thumbnailHoverOutline: '2px solid dodgerblue'
     });
     pageInit();
@@ -729,8 +384,7 @@ function WSIProductsVM(vmID) {
   return new Vue({
     el: "#".concat(vmID),
     data: {
-      products: [],
-      overlay: {}
+      products: []
     },
     methods: {
       addProduct: function addProduct(product) {
@@ -762,6 +416,362 @@ function WSIProductsVM(vmID) {
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (WSIProductsVM);
+
+/***/ }),
+
+/***/ "./node_modules/bootstrap-carousel-modal/CSSEditableProps.js":
+/*!*******************************************************************!*\
+  !*** ./node_modules/bootstrap-carousel-modal/CSSEditableProps.js ***!
+  \*******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// editable css props for carousel modal
+var CSSEditableProps = {
+  modalMaxWidth: '400px',
+  headerPadding: '0.25rem 1rem',
+  headerParagraphMargin: '0',
+  footerPadding: '0 1rem',
+  thumbnailBtnPadding: '4px',
+  thumbnailBtnMargin: '0 6px',
+  thumbnailImgHeight: '60px',
+  thumbnailImgHoverFilter: 'brightness(90%)',
+  thumbnailBorder: 'none',
+  thumbnailImgSelectedBorder: '1px solid #888',
+  thumbnailSelectedOpacity: '60%',
+  thumbnailSelectedFilter: 'grayscale(100%) blur(1px)'
+};
+/* harmony default export */ __webpack_exports__["default"] = (CSSEditableProps);
+
+/***/ }),
+
+/***/ "./node_modules/bootstrap-carousel-modal/CSSTemplate.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/bootstrap-carousel-modal/CSSTemplate.js ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// css template for carousel modal
+var CSSTemplate = "\n    .wsi-overlay {\n      max-width: {{modalMaxWidth}};\n    }\n\n    .wsi-overlay .modal-header {\n      padding: {{headerPadding}};\n    }\n\n    .wsi-overlay .modal-header p {\n      margin: {{headerParagraphMargin}};\n    }\n\n    .wsi-overlay .modal-footer {\n      padding: {{footerPadding}};\n    }\n\n    .wsi-overlay .div-thumbnails {\n      overflow-x: auto;\n      white-space: nowrap;\n      padding: 0.5rem 0 1rem 0;\n      background-color: transparent;\n    }\n    \n    .wsi-overlay .div-thumbnails button {\n      padding: {{thumbnailBtnPadding}};\n      margin: {{thumbnailBtnMargin}};\n      background-color: transparent;\n      border: none;\n    }\n    \n    .wsi-overlay .div-thumbnails button:focus {\n      outline: 2px solid dodgerblue;\n      filter: brightness(80%);\n    }\n    \n    .wsi-overlay .div-thumbnails img {\n      height: {{thumbnailImgHeight}};\n      width: auto;\n      margin: 0;\n      border: {{thumbnailBorder}};\n    }\n    \n    .wsi-overlay .div-thumbnails img:hover {\n      filter: {{thumbnailImgHoverFilter}};\n    }\n\n    .wsi-overlay .div-thumbnails img.selected {\n      cursor: default;\n      border: {{thumbnailImgSelectedBorder}};\n      opacity: {{thumbnailSelectedOpacity}};\n      filter: {{thumbnailSelectedFilter}};\n    }\n    \n    .carousel-container {\n      margin: 0;\n      position: relative;\n     }\n     .carousel-hero {}\n     .carousel-overlay {\n       position: absolute;\n       top: 0;\n       left: 0;\n       opacity: 0;\n       max-width: 100%;\n       height: auto;\n     }\n     .carousel-fade-in {\n       opacity: 1;\n       transition: opacity 1s;\n     }\n";
+/* harmony default export */ __webpack_exports__["default"] = (CSSTemplate);
+
+/***/ }),
+
+/***/ "./node_modules/bootstrap-carousel-modal/HTMLTemplate.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/bootstrap-carousel-modal/HTMLTemplate.js ***!
+  \***************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// HTML template for carousel modal - a Bootstrap modal with an image carousel
+var HTMLTemplate = "\n  <div\n    id=\"carouselModal\"\n    tabindex=\"-1\"\n    class=\"modal fade\"\n    aria-modal=\"true\"\n    role=\"dialog\"\n    data-wrap=\"false\"\n  >\n    <div class=\"modal-dialog modal-dialog-centered wsi-overlay\">\n      <div class=\"modal-content\">\n      \n        <div class=\"modal-header\"><p><!-- name of product --></p>\n          <button type=\"button\"\n            data-dismiss=\"modal\"\n            aria-label=\"Close\"\n            class=\"close\"\n          >\n            <span aria-hidden=\"true\">\xD7</span>\n          </button>\n        </div> <!-- /.modal-header -->\n        \n        <div class=\"modal-body\">\n          <div\n            id=\"carousel-container\"\n            class=\"carousel-container\"\n          >\n            <img\n              id=\"carousel-hero\"\n              class=\"img-fluid\"\n              src=\"\"\n              alt=\"carousel hero\">\n            <img\n              id=\"carousel-overlay\"\n              class=\"carousel-overlay\"\n              alt=\"carousel overlay\"\n              data-in-transition=\"false\"\n              style=\"z-index: -1000\"\n              src=\"\"\n            >\n          </div> <!-- /.carousel-container -->\n        </div> <!-- /.modal-body -->\n\n        <div class=\"modal-footer\">\n          <div id=\"thumbnails-viewport\" class=\"div-thumbnails\"></div>\n        </div> <!-- /.modal-footer -->\n        \n      </div> <!-- /.modal-content -->\n    </div> <!-- /.modal-dialog -->\n  </div> <!-- /.modal -->\n";
+/* harmony default export */ __webpack_exports__["default"] = (HTMLTemplate);
+
+/***/ }),
+
+/***/ "./node_modules/bootstrap-carousel-modal/carousel.js":
+/*!***********************************************************!*\
+  !*** ./node_modules/bootstrap-carousel-modal/carousel.js ***!
+  \***********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _CSSTemplate_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CSSTemplate.js */ "./node_modules/bootstrap-carousel-modal/CSSTemplate.js");
+/* harmony import */ var _CSSEditableProps_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CSSEditableProps.js */ "./node_modules/bootstrap-carousel-modal/CSSEditableProps.js");
+/* harmony import */ var _HTMLTemplate_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./HTMLTemplate.js */ "./node_modules/bootstrap-carousel-modal/HTMLTemplate.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+// carousel overlay modal with thumbnails
+
+
+
+
+function OverlayCarousel(userEditsToCSSProps) {
+  var editableCSSProps = JSON.parse(JSON.stringify(_CSSEditableProps_js__WEBPACK_IMPORTED_MODULE_1__["default"]));
+  var styleSheet = _CSSTemplate_js__WEBPACK_IMPORTED_MODULE_0__["default"].slice(0);
+  var carouselModal,
+      pHeader,
+      imgHero,
+      imgOverlay,
+      carouselFooter,
+      thumbnailsViewport,
+      thumbnailImages = []; // apply user edits to editable css props
+
+  function applyUserEditsToCSSProps() {
+    if (typeof userEditsToCSSProps === 'undefined') {
+      return;
+    }
+
+    for (var _i = 0, _Object$entries = Object.entries(userEditsToCSSProps); _i < _Object$entries.length; _i++) {
+      var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
+          propName = _Object$entries$_i[0],
+          value = _Object$entries$_i[1];
+
+      if (typeof editableCSSProps[propName] === 'undefined') {
+        continue;
+      }
+
+      editableCSSProps[propName] = value;
+    }
+  } // apply all css props to styleSheet
+
+
+  function applyCSSPropsToStyleSheet() {
+    for (var _i2 = 0, _Object$entries2 = Object.entries(editableCSSProps); _i2 < _Object$entries2.length; _i2++) {
+      var _Object$entries2$_i = _slicedToArray(_Object$entries2[_i2], 2),
+          propName = _Object$entries2$_i[0],
+          value = _Object$entries2$_i[1];
+
+      var searchStr = "{{".concat(propName, "}}");
+      var subStr = "".concat(value);
+      styleSheet = styleSheet.replace(searchStr, subStr);
+    }
+  } // append HTML template to <body>
+
+
+  function appendHTMLTemplateToBody() {
+    var div = document.createElement('div');
+    div.id = "carousel-modal-container";
+    div.innerHTML = _HTMLTemplate_js__WEBPACK_IMPORTED_MODULE_2__["default"];
+    document.body.appendChild(div);
+    carouselModal = document.getElementById('carouselModal');
+    pHeader = carouselModal.querySelector('.modal-header p');
+    imgHero = document.getElementById('carousel-hero');
+    imgOverlay = document.getElementById('carousel-overlay');
+    thumbnailsViewport = document.getElementById('thumbnails-viewport');
+    carouselFooter = carouselModal.querySelector('.modal-footer'); // set up the image fade
+
+    imgOverlay.addEventListener('transitionend', completeImageFade); // react to hero image changes
+
+    imgHero.addEventListener('change', function () {
+      var heroIndex = Number(imgHero.dataset.index); // get all the thumbnail images
+      // const thumbImgs = getAllThumbnails();
+      // set (unset) the selected class for each thumbnail image
+
+      var thumbSelected = updateThumbnailsSelectedClass(thumbnailImages, heroIndex); // scroll the thumbnails container
+
+      scrollThumbnailsViewport(thumbSelected);
+    });
+  } // append style sheet to <head>
+
+
+  function appendStyleSheetToHead() {
+    var style = document.createElement('style');
+    style.innerHTML = styleSheet;
+    document.head.appendChild(style);
+  } // populate overlay with name, carousel and thumbnail images
+
+
+  function populate(name, hrefs) {
+    pHeader.innerHTML = name; // populate the carousel and the thumbnails
+
+    thumbnailsViewport.innerHTML = '';
+    thumbnailImages = hrefs.map(function (href, index) {
+      var btnThumb = document.createElement('button');
+      thumbnailsViewport.appendChild(btnThumb);
+      var imgThumb = document.createElement('img');
+      imgThumb.dataset.index = index;
+      imgThumb.src = href;
+      btnThumb.appendChild(imgThumb);
+      return imgThumb;
+    }); // show thumbnails when there are multiple images
+
+    var hasMultipleImages = hrefs.length > 1;
+    carouselFooter.style.display = hasMultipleImages ? '' : 'none';
+  } // show the carousel modal
+
+
+  function show() {
+    imgOverlay.dataset.inTransition = "false"; // make the display changes *before* showing the modal
+
+    var firstThumb = thumbnailsViewport.querySelector('img');
+
+    if (firstThumb === null) {
+      console.error('no thumbnail images found');
+      return;
+    }
+
+    displaySelectedImage(firstThumb, false);
+    $('#carouselModal').modal('show');
+  }
+  /**
+   * display in hero image the selected thumbnail image
+   * @param {Element} thumbnailImg
+   * @param {boolean} animate - animate the hero image transition
+   */
+
+
+  function displaySelectedImage(thumbnailImg) {
+    var animate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+
+    // don't change hero image if it is still in transition from an
+    // earlier change
+    if (imgOverlay.dataset.inTransition === "true") {
+      console.error('hero image in transition, cannot change now');
+      return;
+    } // dispatch 'change' event to hero image, which will update thumbnails
+
+
+    imgHero.dataset.index = thumbnailImg.dataset.index;
+    var changeEvt = new Event('change');
+    imgHero.dispatchEvent(changeEvt);
+    imgOverlay.src = thumbnailImg.src;
+    imgOverlay.dataset.index = thumbnailImg.dataset.index;
+
+    if (animate) {
+      // bring overlay to front and fade it in
+      imgOverlay.dataset.inTransition = "true";
+      imgOverlay.style.zIndex = "100";
+      imgOverlay.classList.add('carousel-fade-in');
+    } else {
+      // just clean up without animation
+      completeImageFade();
+    }
+  } // clean up display elements when image fade transition completes
+
+
+  function completeImageFade() {
+    // copy overlay image to hero image
+    imgHero.src = imgOverlay.src; // send overlay to back and clean up
+
+    imgOverlay.style.zIndex = "-1000";
+    imgOverlay.src = "";
+    imgOverlay.dataset.index = null;
+    imgOverlay.dataset.inTransition = "false";
+
+    if (imgOverlay.classList.contains('carousel-fade-in')) {
+      imgOverlay.classList.remove('carousel-fade-in');
+    }
+  } // enter key press over thumbnail button emit thumbnail image click
+
+
+  function listenForEnterKeyOverButton() {
+    thumbnailsViewport.addEventListener('keydown', function (e) {
+      if (e.key !== 'Enter') {
+        return;
+      }
+
+      var elem = e.target;
+
+      if (elem.tagName !== 'BUTTON') {
+        return;
+      }
+
+      var btnImg = elem.firstChild;
+
+      if (!btnImg || btnImg.tagName !== 'IMG') {
+        return;
+      }
+
+      btnImg.click();
+    });
+  } // respond to clicks on thumbnail images inside 'div-thumbnails'
+
+
+  function listenForThumbnailImageClicks() {
+    thumbnailsViewport.addEventListener('click', function (evt) {
+      var elClicked = evt.target;
+
+      var isThumbnailImg = function isThumbnailImg(el) {
+        return el.tagName === 'IMG' && typeof el.dataset.index !== 'undefined';
+      };
+
+      if (isThumbnailImg(elClicked) === false) {
+        return;
+      }
+
+      displaySelectedImage(elClicked);
+    });
+  } // update the "selected" class of each thumbnail image
+
+
+  function updateThumbnailsSelectedClass(thumbnails, carouselIndex) {
+    var cIndex = Number(carouselIndex);
+    var thumbSelected = null;
+    thumbnails.forEach(function (img) {
+      var thumbIndex = +img.dataset.index;
+
+      if (thumbIndex === cIndex) {
+        thumbSelected = img;
+        thumbSelected.classList.add('selected');
+        return;
+      }
+
+      img.classList.remove('selected');
+    });
+    return thumbSelected;
+  }
+  /**
+   * scroll thumbnails viewport to show `thumbnail` in center of window
+   * @param {Element} thumbnail
+   */
+
+
+  function scrollThumbnailsViewport(thumbnail) {
+    if (!thumbnail) {
+      return;
+    }
+
+    var windowHalfWidth = Math.round(thumbnailsViewport.clientWidth / 2);
+    var tStyle = window.getComputedStyle(thumbnail);
+    var thumbnailWidth = thumbnail.offsetWidth + parseFloat(tStyle.marginLeft) + parseFloat(tStyle.marginRight);
+    var thumbnailCenterPosInViewport = thumbnail.offsetLeft + thumbnail.offsetWidth / 2; // scroll to place thumbnail in center of viewport window
+
+    var scrollAmount = thumbnailCenterPosInViewport - windowHalfWidth - thumbnailWidth / 2;
+    var divThumbnails = $('#thumbnails-viewport');
+
+    if (divThumbnails.animate) {
+      // console.log('scrollThumbnailsViewport using jQuery.animate()');
+      divThumbnails.animate({
+        scrollLeft: scrollAmount
+      }, 500);
+    } else if (divThumbnails.scrollLeft) {
+      console.log('scrollThumbnailsViewport using fallback scrollLeft()');
+      divThumbnails.scrollLeft(scrollAmount);
+    } else {
+      console.log('scrollThumbnailsViewport using fallback scroll()');
+      divThumbnails.scroll(scrollAmount, 0);
+    }
+  }
+
+  function init() {
+    applyUserEditsToCSSProps();
+    applyCSSPropsToStyleSheet();
+    appendHTMLTemplateToBody();
+    appendStyleSheetToHead();
+    listenForThumbnailImageClicks();
+    listenForEnterKeyOverButton();
+  } // initialize
+
+
+  init();
+  return {
+    populate: populate,
+    show: show
+  };
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (OverlayCarousel);
 
 /***/ })
 
