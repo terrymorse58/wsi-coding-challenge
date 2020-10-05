@@ -436,6 +436,8 @@ var CSSEditableProps = {
   footerPadding: '0 1rem',
   thumbnailBtnPadding: '4px',
   thumbnailBtnMargin: '0 6px',
+
+  /* must be in 'px' units */
   thumbnailImgHeight: '60px',
   thumbnailImgHoverFilter: 'brightness(90%)',
   thumbnailBorder: 'none',
@@ -457,7 +459,7 @@ var CSSEditableProps = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 // css template for carousel modal
-var CSSTemplate = "\n    .wsi-overlay {\n      max-width: {{modalMaxWidth}};\n    }\n\n    .wsi-overlay .modal-header {\n      padding: {{headerPadding}};\n    }\n\n    .wsi-overlay .modal-header p {\n      margin: {{headerParagraphMargin}};\n    }\n\n    .wsi-overlay .modal-footer {\n      padding: {{footerPadding}};\n    }\n\n    .wsi-overlay .div-thumbnails {\n      overflow-x: auto;\n      white-space: nowrap;\n      padding: 0.5rem 0 1rem 0;\n      background-color: transparent;\n    }\n    \n    .wsi-overlay .div-thumbnails button {\n      padding: {{thumbnailBtnPadding}};\n      margin: {{thumbnailBtnMargin}};\n      background-color: transparent;\n      border: none;\n    }\n    \n    .wsi-overlay .div-thumbnails button:focus {\n      outline: 2px solid dodgerblue;\n      filter: brightness(80%);\n    }\n    \n    .wsi-overlay .div-thumbnails img {\n      height: {{thumbnailImgHeight}};\n      width: auto;\n      margin: 0;\n      border: {{thumbnailBorder}};\n    }\n    \n    .wsi-overlay .div-thumbnails img:hover {\n      filter: {{thumbnailImgHoverFilter}};\n    }\n\n    .wsi-overlay .div-thumbnails img.selected {\n      cursor: default;\n      border: {{thumbnailImgSelectedBorder}};\n      opacity: {{thumbnailSelectedOpacity}};\n      filter: {{thumbnailSelectedFilter}};\n    }\n    \n    .carousel-container {\n      margin: 0;\n      position: relative;\n     }\n     .carousel-hero {}\n     .carousel-overlay {\n       position: absolute;\n       top: 0;\n       left: 0;\n       opacity: 0;\n       max-width: 100%;\n       height: auto;\n     }\n     .carousel-fade-in {\n       opacity: 1;\n       transition: opacity 1s;\n     }\n";
+var CSSTemplate = "\n    .wsi-overlay {\n      max-width: {{modalMaxWidth}};\n    }\n\n    .wsi-overlay .modal-header {\n      padding: {{headerPadding}};\n    }\n\n    .wsi-overlay .modal-header p {\n      margin: {{headerParagraphMargin}};\n    }\n\n    .wsi-overlay .modal-footer {\n      padding: {{footerPadding}};\n    }\n\n    .wsi-overlay .div-thumbnails {\n      overflow-x: auto;\n      white-space: nowrap;\n      padding: 0.5rem 0 1rem 0;\n      background-color: transparent;\n      scroll-behavior: smooth;\n    }\n    \n    .wsi-overlay .div-thumbnails button {\n      padding: {{thumbnailBtnPadding}};\n      margin: {{thumbnailBtnMargin}};\n      background-color: transparent;\n      border: none;\n    }\n    \n    .wsi-overlay .div-thumbnails button:focus {\n      outline: 2px solid dodgerblue;\n      filter: brightness(80%);\n    }\n    \n    .wsi-overlay .div-thumbnails img {\n      height: {{thumbnailImgHeight}};\n      width: auto;\n      margin: 0;\n      border: {{thumbnailBorder}};\n    }\n    \n    .wsi-overlay .div-thumbnails img:hover {\n      filter: {{thumbnailImgHoverFilter}};\n    }\n\n    .wsi-overlay .div-thumbnails img.selected {\n      cursor: default;\n      border: {{thumbnailImgSelectedBorder}};\n      opacity: {{thumbnailSelectedOpacity}};\n      filter: {{thumbnailSelectedFilter}};\n    }\n    \n    .carousel-container {\n      margin: 0;\n      position: relative;\n     }\n     .carousel-hero {}\n     .carousel-overlay {\n       position: absolute;\n       top: 0;\n       left: 0;\n       opacity: 0;\n       max-width: 100%;\n       height: auto;\n     }\n     .carousel-fade-in {\n       opacity: 1;\n       transition: opacity 1s;\n     }\n";
 /* harmony default export */ __webpack_exports__["default"] = (CSSTemplate);
 
 /***/ }),
@@ -507,15 +509,22 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 function OverlayCarousel(userEditsToCSSProps) {
+  // make copies of templates
   var editableCSSProps = JSON.parse(JSON.stringify(_CSSEditableProps_js__WEBPACK_IMPORTED_MODULE_1__["default"]));
   var styleSheet = _CSSTemplate_js__WEBPACK_IMPORTED_MODULE_0__["default"].slice(0);
   var carouselModal,
+      jqCarouselModal,
       pHeader,
       imgHero,
       imgOverlay,
       carouselFooter,
       thumbnailsViewport,
-      thumbnailImages = []; // apply user edits to editable css props
+      thumbnailImages = []; // returns true if element supports smooth scrolling
+
+  var hasSmoothScrolling = function hasSmoothScrolling(el) {
+    return getComputedStyle(el).scrollBehavior === 'smooth';
+  }; // apply user edits to editable css props
+
 
   function applyUserEditsToCSSProps() {
     if (typeof userEditsToCSSProps === 'undefined') {
@@ -555,6 +564,7 @@ function OverlayCarousel(userEditsToCSSProps) {
     div.innerHTML = _HTMLTemplate_js__WEBPACK_IMPORTED_MODULE_2__["default"];
     document.body.appendChild(div);
     carouselModal = document.getElementById('carouselModal');
+    jqCarouselModal = $('#carouselModal');
     pHeader = carouselModal.querySelector('.modal-header p');
     imgHero = document.getElementById('carousel-hero');
     imgOverlay = document.getElementById('carousel-overlay');
@@ -612,7 +622,7 @@ function OverlayCarousel(userEditsToCSSProps) {
     }
 
     displaySelectedImage(firstThumb, false);
-    $('#carouselModal').modal('show');
+    jqCarouselModal.modal('show');
   }
   /**
    * display in hero image the selected thumbnail image
@@ -722,36 +732,73 @@ function OverlayCarousel(userEditsToCSSProps) {
     return thumbSelected;
   }
   /**
-   * scroll thumbnails viewport to show `thumbnail` in center of window
-   * @param {Element} thumbnail
+   * scroll thumbnails viewport to show `thumbnailImg` in center of window
+   * @param {Element} thumbnailImg - thumbnail's img element
    */
 
 
-  function scrollThumbnailsViewport(thumbnail) {
-    if (!thumbnail) {
+  function scrollThumbnailsViewport(thumbnailImg) {
+    if (!thumbnailImg) {
       return;
     }
 
-    var windowHalfWidth = Math.round(thumbnailsViewport.clientWidth / 2);
-    var tStyle = window.getComputedStyle(thumbnail);
-    var thumbnailWidth = thumbnail.offsetWidth + parseFloat(tStyle.marginLeft) + parseFloat(tStyle.marginRight);
-    var thumbnailCenterPosInViewport = thumbnail.offsetLeft + thumbnail.offsetWidth / 2; // scroll to place thumbnail in center of viewport window
+    var viewportWidth = thumbnailsViewport.scrollWidth;
+    var windowWidth = thumbnailsViewport.clientWidth;
+    var scrollMax = viewportWidth - windowWidth;
+    var tnParent = thumbnailImg.parentElement; // thumbnailImg parent is button
 
-    var scrollAmount = thumbnailCenterPosInViewport - windowHalfWidth - thumbnailWidth / 2;
-    var divThumbnails = $('#thumbnails-viewport');
+    var tnStyle = window.getComputedStyle(tnParent);
+    var tnWidth = tnParent.offsetWidth + parseFloat(tnStyle.marginLeft) + parseFloat(tnStyle.marginRight);
+    var thumbnailCenterOffset = tnParent.offsetLeft + tnParent.offsetWidth / 2; // console.log(`    viewportWidth: ${thumbnailsViewport.scrollWidth}
+    // windowWidth: ${windowWidth}
+    // scrollMax: ${scrollMax}
+    // tnParent.offsetLeft: ${tnParent.offsetLeft}
+    // tnParent.offsetWidth: ${tnParent.offsetWidth}
+    // thumbnailCenterOffset: ${thumbnailCenterOffset}`);
+    // scroll viewport to position thumbnail in center of viewport window
 
-    if (divThumbnails.animate) {
-      // console.log('scrollThumbnailsViewport using jQuery.animate()');
-      divThumbnails.animate({
-        scrollLeft: scrollAmount
-      }, 500);
-    } else if (divThumbnails.scrollLeft) {
-      console.log('scrollThumbnailsViewport using fallback scrollLeft()');
-      divThumbnails.scrollLeft(scrollAmount);
-    } else {
-      console.log('scrollThumbnailsViewport using fallback scroll()');
-      divThumbnails.scroll(scrollAmount, 0);
+    var newScrollLeft = thumbnailCenterOffset - Math.round((windowWidth + tnWidth) / 2);
+
+    if (newScrollLeft < 0) {
+      newScrollLeft = 0;
     }
+
+    if (newScrollLeft > scrollMax) {
+      newScrollLeft = scrollMax;
+    } // console.log(`  newScrollLeft: ${newScrollLeft}`);
+
+
+    if (hasSmoothScrolling(thumbnailsViewport)) {
+      // console.log('scrolling with Element.scrollLeft = newScrollLeft');
+      thumbnailsViewport.scrollLeft = newScrollLeft;
+    } else {
+      // simulate scroll feature with vanilla JavaScript
+      var timeStep = 20;
+      var timeTotal = 400;
+      var stepsTotal = Math.round(timeTotal / timeStep);
+      var scrollStart = thumbnailsViewport.scrollLeft;
+      var scrollTotal = newScrollLeft - scrollStart;
+      var scrollStep = Math.round(scrollTotal / stepsTotal);
+      var time = timeStep,
+          scroll = scrollStart + scrollStep;
+
+      var step = function step() {
+        if (time >= timeTotal) {
+          thumbnailsViewport.scrollLeft = newScrollLeft;
+          return;
+        }
+
+        thumbnailsViewport.scrollLeft = scroll;
+        time += timeStep;
+        scroll += scrollStep;
+        setTimeout(step, timeStep);
+      };
+
+      if (scrollTotal !== 0) {
+        step();
+      }
+    } // console.log(`after scrollLeft: ${thumbnailsViewport.scrollLeft}`);
+
   }
 
   function init() {
