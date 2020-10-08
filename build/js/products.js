@@ -430,12 +430,11 @@ function WSIProductsVM(vmID) {
 __webpack_require__.r(__webpack_exports__);
 // editable css props for carousel modal
 var CSSEditableProps = {
-  modalMaxWidth: '400px',
   headerPadding: '0.25rem 1rem',
   headerParagraphMargin: '0',
   footerPadding: '0 1rem',
-  thumbnailBtnPadding: '4px',
-  thumbnailBtnMargin: '0 6px',
+  thumbnailBtnPadding: '0',
+  thumbnailBtnMargin: '0 4px',
 
   /* must be in 'px' units */
   thumbnailImgHeight: '60px',
@@ -459,7 +458,7 @@ var CSSEditableProps = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 // css template for carousel modal
-var CSSTemplate = "\n    .wsi-overlay {\n      max-width: {{modalMaxWidth}};\n    }\n\n    .wsi-overlay .modal-header {\n      padding: {{headerPadding}};\n    }\n\n    .wsi-overlay .modal-header p {\n      margin: {{headerParagraphMargin}};\n    }\n\n    .wsi-overlay .modal-footer {\n      padding: {{footerPadding}};\n    }\n\n    .wsi-overlay .div-thumbnails {\n      overflow-x: auto;\n      white-space: nowrap;\n      padding: 0.5rem 0 1rem 0;\n      background-color: transparent;\n      scroll-behavior: smooth;\n    }\n    \n    .wsi-overlay .div-thumbnails button {\n      padding: {{thumbnailBtnPadding}};\n      margin: {{thumbnailBtnMargin}};\n      background-color: transparent;\n      border: none;\n    }\n    \n    .wsi-overlay .div-thumbnails button:focus {\n      outline: 2px solid dodgerblue;\n      filter: brightness(80%);\n    }\n    \n    .wsi-overlay .div-thumbnails img {\n      height: {{thumbnailImgHeight}};\n      width: auto;\n      margin: 0;\n      border: {{thumbnailBorder}};\n    }\n    \n    .wsi-overlay .div-thumbnails img:hover {\n      filter: {{thumbnailImgHoverFilter}};\n    }\n\n    .wsi-overlay .div-thumbnails img.selected {\n      cursor: default;\n      border: {{thumbnailImgSelectedBorder}};\n      opacity: {{thumbnailSelectedOpacity}};\n      filter: {{thumbnailSelectedFilter}};\n    }\n    \n    .carousel-container {\n      margin: 0;\n      position: relative;\n     }\n     .carousel-hero {}\n     .carousel-overlay {\n       position: absolute;\n       top: 0;\n       left: 0;\n       opacity: 0;\n       max-width: 100%;\n       height: auto;\n     }\n     .carousel-fade-in {\n       opacity: 1;\n       transition: opacity 1s;\n     }\n";
+var CSSTemplate = "\n    .wsi-overlay {\n    }\n    \n    .wsi-overlay.modal-dialog {\n      margin: 0 auto;\n    }\n\n    .wsi-overlay .modal-header {\n      padding: {{headerPadding}};\n    }\n\n    .wsi-overlay .modal-header p {\n      margin: {{headerParagraphMargin}};\n    }\n\n    .wsi-overlay .modal-footer {\n      padding: {{footerPadding}};\n    }\n\n    .wsi-overlay .div-thumbnails {\n      overflow-x: auto;\n      white-space: nowrap;\n      margin: 0;\n      padding: 8px 16px 12px 16px; /* padding must be 'px' */\n      background-color: transparent;\n      scroll-behavior: smooth;\n    }\n    \n    .wsi-overlay .div-thumbnails button {\n      padding: {{thumbnailBtnPadding}};\n      margin: {{thumbnailBtnMargin}};\n      background-color: transparent;\n      border: none;\n    }\n    \n    .wsi-overlay .div-thumbnails button:focus {\n      outline: 2px solid dodgerblue;\n      filter: brightness(80%);\n    }\n    \n    .wsi-overlay .div-thumbnails img {\n      height: {{thumbnailImgHeight}};\n      width: auto;\n      margin: 0;\n      border: {{thumbnailBorder}};\n    }\n    \n    .wsi-overlay .div-thumbnails img:hover {\n      filter: {{thumbnailImgHoverFilter}};\n    }\n\n    .wsi-overlay .div-thumbnails img.selected {\n      cursor: default;\n      border: {{thumbnailImgSelectedBorder}};\n      opacity: {{thumbnailSelectedOpacity}};\n      filter: {{thumbnailSelectedFilter}};\n    }\n    \n    .carousel-container {\n      margin: 0;\n      position: relative;\n      width: 100%;\n     }\n     .carousel-hero {\n      position: absolute;\n      top: 0;\n      left: 0;\n      width: 100%;\n      height: auto;\n     }\n     .carousel-overlay {\n       position: absolute;\n       top: 0;\n       left: 0;\n       opacity: 0;\n       width: 100%;\n       height: auto;\n     }\n     .carousel-fade-in {\n       opacity: 1;\n       transition: opacity 1s;\n     }\n";
 /* harmony default export */ __webpack_exports__["default"] = (CSSTemplate);
 
 /***/ }),
@@ -474,7 +473,7 @@ var CSSTemplate = "\n    .wsi-overlay {\n      max-width: {{modalMaxWidth}};\n  
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 // HTML template for carousel modal - a Bootstrap modal with an image carousel
-var HTMLTemplate = "\n  <div\n    id=\"carouselModal\"\n    tabindex=\"-1\"\n    class=\"modal fade\"\n    aria-modal=\"true\"\n    role=\"dialog\"\n    data-wrap=\"false\"\n  >\n    <div class=\"modal-dialog modal-dialog-centered wsi-overlay\">\n      <div class=\"modal-content\">\n      \n        <div class=\"modal-header\"><p><!-- name of product --></p>\n          <button type=\"button\"\n            data-dismiss=\"modal\"\n            aria-label=\"Close\"\n            class=\"close\"\n          >\n            <span aria-hidden=\"true\">\xD7</span>\n          </button>\n        </div> <!-- /.modal-header -->\n        \n        <div class=\"modal-body\">\n          <div\n            id=\"carousel-container\"\n            class=\"carousel-container\"\n          >\n            <img\n              id=\"carousel-hero\"\n              class=\"img-fluid\"\n              src=\"\"\n              alt=\"carousel hero\">\n            <img\n              id=\"carousel-overlay\"\n              class=\"carousel-overlay\"\n              alt=\"carousel overlay\"\n              data-in-transition=\"false\"\n              style=\"z-index: -1000\"\n              src=\"\"\n            >\n          </div> <!-- /.carousel-container -->\n        </div> <!-- /.modal-body -->\n\n        <div class=\"modal-footer\">\n          <div id=\"thumbnails-viewport\" class=\"div-thumbnails\"></div>\n        </div> <!-- /.modal-footer -->\n        \n      </div> <!-- /.modal-content -->\n    </div> <!-- /.modal-dialog -->\n  </div> <!-- /.modal -->\n";
+var HTMLTemplate = "\n  <div\n    id=\"carouselModal\"\n    tabindex=\"-1\"\n    class=\"modal fade\"\n    aria-modal=\"true\"\n    role=\"dialog\"\n    data-wrap=\"false\"\n  >\n    <div class=\"modal-dialog modal-dialog-centered wsi-overlay\">\n      <div class=\"modal-content\">\n      \n        <div class=\"modal-header\">\n          <p><!-- name of product --></p>\n          <button type=\"button\"\n            data-dismiss=\"modal\"\n            aria-label=\"Close\"\n            class=\"close\"\n          >\n            <span aria-hidden=\"true\">\xD7</span>\n          </button>\n        </div> <!-- /.modal-header -->\n        \n        <div class=\"modal-body\">\n          <div\n            id=\"carousel-container\"\n            class=\"carousel-container\"\n          >\n            <img\n              id=\"carousel-hero\"\n              class=\"carousel-hero\"\n              src=\"\"\n              alt=\"carousel hero\">\n            <img\n              id=\"carousel-overlay\"\n              class=\"carousel-overlay\"\n              alt=\"carousel overlay\"\n              data-in-transition=\"false\"\n              style=\"z-index: -1000\"\n              src=\"\"\n            >\n          </div> <!-- /.carousel-container -->\n        </div> <!-- /.modal-body -->\n\n        <div class=\"modal-footer\">\n          <div id=\"thumbnails-viewport\" class=\"div-thumbnails\"></div>\n        </div> <!-- /.modal-footer -->\n        \n      </div> <!-- /.modal-content -->\n    </div> <!-- /.modal-dialog -->\n  </div> <!-- /.modal -->\n";
 /* harmony default export */ __webpack_exports__["default"] = (HTMLTemplate);
 
 /***/ }),
@@ -514,12 +513,17 @@ function OverlayCarousel(userEditsToCSSProps) {
   var styleSheet = _CSSTemplate_js__WEBPACK_IMPORTED_MODULE_0__["default"].slice(0);
   var carouselModal,
       jqCarouselModal,
+      modalDialog,
+      modalContent,
+      modalHeader,
       pHeader,
+      modalBody,
+      carouselContainer,
       imgHero,
       imgOverlay,
-      carouselFooter,
       thumbnailsViewport,
-      thumbnailImages = []; // returns true if element supports smooth scrolling
+      thumbnailImages = [],
+      modalFooter; // returns true if element supports smooth scrolling
 
   var hasSmoothScrolling = function hasSmoothScrolling(el) {
     return getComputedStyle(el).scrollBehavior === 'smooth';
@@ -565,18 +569,21 @@ function OverlayCarousel(userEditsToCSSProps) {
     document.body.appendChild(div);
     carouselModal = document.getElementById('carouselModal');
     jqCarouselModal = $('#carouselModal');
+    modalDialog = document.querySelector('.modal-dialog');
+    modalContent = document.querySelector('.modal-content');
+    modalHeader = document.querySelector('.modal-header');
     pHeader = carouselModal.querySelector('.modal-header p');
+    modalBody = carouselModal.querySelector('.wsi-overlay .modal-body');
+    carouselContainer = document.getElementById('carousel-container');
     imgHero = document.getElementById('carousel-hero');
     imgOverlay = document.getElementById('carousel-overlay');
     thumbnailsViewport = document.getElementById('thumbnails-viewport');
-    carouselFooter = carouselModal.querySelector('.modal-footer'); // set up the image fade
+    modalFooter = carouselModal.querySelector('.modal-footer'); // set up the image fade
 
     imgOverlay.addEventListener('transitionend', completeImageFade); // react to hero image changes
 
     imgHero.addEventListener('change', function () {
-      var heroIndex = Number(imgHero.dataset.index); // get all the thumbnail images
-      // const thumbImgs = getAllThumbnails();
-      // set (unset) the selected class for each thumbnail image
+      var heroIndex = Number(imgHero.dataset.index); // set (unset) the selected class for each thumbnail image
 
       var thumbSelected = updateThumbnailsSelectedClass(thumbnailImages, heroIndex); // scroll the thumbnails container
 
@@ -593,13 +600,57 @@ function OverlayCarousel(userEditsToCSSProps) {
 
 
   function populate(name, hrefs) {
-    pHeader.innerHTML = name; // populate the carousel and the thumbnails
+    // console.log('populate()')
+    // display the modal (invisibly) to obtain its dimensions
+    carouselModal.style.display = 'block';
+    pHeader.innerHTML = name; // detect aspect ratio of image when it's loaded
+
+    var imagesLoaded = 0;
+    var aspectRatioMin = Infinity;
+
+    function evalLoadedImage() {
+      var img = this;
+      var aspectRatio;
+      imagesLoaded++;
+
+      if (img.width === 0 || img.height === 0) {
+        return;
+      }
+
+      aspectRatio = img.width / img.height;
+      img.dataset.aspectRatio = aspectRatio;
+      aspectRatioMin = aspectRatio < aspectRatioMin ? aspectRatio : aspectRatioMin; // console.log(`index: ${img.dataset.index}, aspectRatio: ${aspectRatio}, min: ${aspectRatioMin}`);
+
+      if (imagesLoaded < hrefs.length) {
+        return;
+      }
+
+      if (aspectRatioMin === Infinity) {
+        return;
+      } // all images loaded: set the padding-bottom of container to match aspect
+      // ratio
+
+
+      carouselContainer.style.paddingBottom = Math.round(1.0 / aspectRatioMin * 100) + '%';
+      carouselContainer.dataset.aspectRatio = String(aspectRatioMin);
+      var contentAspectRatio = modalContent.offsetWidth / modalContent.offsetHeight;
+      modalDialog.style.maxWidth = "calc(".concat(Math.round(contentAspectRatio * 100), "vh - 2rem)"); // console.log(`  modalContent.offsetWidth: ${modalContent.offsetWidth}
+      //   modalContent.offsetHeight: ${modalContent.offsetHeight}
+      //   aspectRatioMin: ${aspectRatioMin}
+      //   contentAspectRatio: ${contentAspectRatio}
+      //   modalDialog.style.maxWidth: ${modalDialog.style.maxWidth}`);
+      // un-display the modal
+
+      carouselModal.style.display = "none";
+    } // populate the thumbnails
+
 
     thumbnailsViewport.innerHTML = '';
     thumbnailImages = hrefs.map(function (href, index) {
       var btnThumb = document.createElement('button');
       thumbnailsViewport.appendChild(btnThumb);
       var imgThumb = document.createElement('img');
+      imgThumb.onload = evalLoadedImage;
       imgThumb.dataset.index = index;
       imgThumb.src = href;
       btnThumb.appendChild(imgThumb);
@@ -607,7 +658,7 @@ function OverlayCarousel(userEditsToCSSProps) {
     }); // show thumbnails when there are multiple images
 
     var hasMultipleImages = hrefs.length > 1;
-    carouselFooter.style.display = hasMultipleImages ? '' : 'none';
+    modalFooter.style.display = hasMultipleImages ? '' : 'none';
   } // show the carousel modal
 
 
@@ -634,11 +685,24 @@ function OverlayCarousel(userEditsToCSSProps) {
   function displaySelectedImage(thumbnailImg) {
     var animate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
 
+    // console.log(`displaySelectedImage(imgIndex=${thumbnailImg.dataset.index},` +
+    // ` animate=${animate})`);
     // don't change hero image if it is still in transition from an
     // earlier change
     if (imgOverlay.dataset.inTransition === "true") {
       console.error('hero image in transition, cannot change now');
       return;
+    } // don't animate transition if image's aspect ratio is greater than the
+    // current hero image's
+
+
+    var aspectRatioMismatch = function aspectRatioMismatch(img) {
+      return +img.dataset.aspectRatio > +imgHero.dataset.aspectRatio;
+    };
+
+    if (aspectRatioMismatch(thumbnailImg)) {
+      console.log('displaySelectedImage aspect ratio mismatch, no animation');
+      animate = false;
     } // dispatch 'change' event to hero image, which will update thumbnails
 
 
@@ -647,6 +711,7 @@ function OverlayCarousel(userEditsToCSSProps) {
     imgHero.dispatchEvent(changeEvt);
     imgOverlay.src = thumbnailImg.src;
     imgOverlay.dataset.index = thumbnailImg.dataset.index;
+    imgOverlay.dataset.aspectRatio = thumbnailImg.dataset.aspectRatio;
 
     if (animate) {
       // bring overlay to front and fade it in
@@ -661,17 +726,23 @@ function OverlayCarousel(userEditsToCSSProps) {
 
 
   function completeImageFade() {
+    // console.log('completeImageFade()');
     // copy overlay image to hero image
-    imgHero.src = imgOverlay.src; // send overlay to back and clean up
+    imgHero.src = imgOverlay.src;
+    imgHero.dataset.index = imgOverlay.dataset.index;
+    imgHero.dataset.aspectRatio = imgOverlay.dataset.aspectRatio; // send overlay to back and clean up (delayed to prevent flash)
 
-    imgOverlay.style.zIndex = "-1000";
-    imgOverlay.src = "";
-    imgOverlay.dataset.index = null;
-    imgOverlay.dataset.inTransition = "false";
+    setTimeout(function () {
+      imgOverlay.style.zIndex = "-1000";
+      imgOverlay.src = "";
+      imgOverlay.dataset.index = null;
+      imgOverlay.dataset.inTransition = "false";
+      imgOverlay.dataset.aspectRatio = "0";
 
-    if (imgOverlay.classList.contains('carousel-fade-in')) {
-      imgOverlay.classList.remove('carousel-fade-in');
-    }
+      if (imgOverlay.classList.contains('carousel-fade-in')) {
+        imgOverlay.classList.remove('carousel-fade-in');
+      }
+    }, 200);
   } // enter key press over thumbnail button emit thumbnail image click
 
 
@@ -743,21 +814,25 @@ function OverlayCarousel(userEditsToCSSProps) {
     }
 
     var viewportWidth = thumbnailsViewport.scrollWidth;
+    var vpStyle = getComputedStyle(thumbnailsViewport);
+    var vpPaddingLeft = parseFloat(vpStyle.paddingLeft);
     var windowWidth = thumbnailsViewport.clientWidth;
     var scrollMax = viewportWidth - windowWidth;
     var tnParent = thumbnailImg.parentElement; // thumbnailImg parent is button
 
-    var tnStyle = window.getComputedStyle(tnParent);
+    var tnStyle = getComputedStyle(tnParent);
     var tnWidth = tnParent.offsetWidth + parseFloat(tnStyle.marginLeft) + parseFloat(tnStyle.marginRight);
     var thumbnailCenterOffset = tnParent.offsetLeft + tnParent.offsetWidth / 2; // console.log(`    viewportWidth: ${thumbnailsViewport.scrollWidth}
+    // vpPaddingLeft: ${vpPaddingLeft}
     // windowWidth: ${windowWidth}
     // scrollMax: ${scrollMax}
     // tnParent.offsetLeft: ${tnParent.offsetLeft}
     // tnParent.offsetWidth: ${tnParent.offsetWidth}
+    // tnWidth: ${tnWidth}
     // thumbnailCenterOffset: ${thumbnailCenterOffset}`);
     // scroll viewport to position thumbnail in center of viewport window
 
-    var newScrollLeft = thumbnailCenterOffset - Math.round((windowWidth + tnWidth) / 2);
+    var newScrollLeft = thumbnailCenterOffset - Math.round((windowWidth + tnWidth) / 2) + vpPaddingLeft;
 
     if (newScrollLeft < 0) {
       newScrollLeft = 0;
