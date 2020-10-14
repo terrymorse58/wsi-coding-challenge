@@ -2,7 +2,7 @@
 import WSIProdStore from './products.store.js';
 import WSIProductsVM from './products.vue.js';
 import OverlayCarousel from
-    '../node_modules/bootstrap-carousel-modal/carousel.js';
+    '../node_modules/image-gallery-overlay/build/js/carousel.js';
 let carousel;
 
 const JSON_FILE_NAME = 'wsi-products.json';
@@ -29,8 +29,10 @@ function handleProductClick (evt) {
   }
   const thisProduct = prodStore.getProduct(target.dataset.id);
   const imgHrefs = thisProduct.images.map((image) => image.href);
-  carousel.populate(thisProduct.name, imgHrefs);
-  carousel.show();
+  carousel.populate(thisProduct.name, imgHrefs)
+    .then(() => {
+      carousel.show();
+    });
 }
 
 // add all products in prodstore to Vue model

@@ -97,7 +97,7 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _products_store_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./products.store.js */ "./js/products.store.js");
 /* harmony import */ var _products_vue_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./products.vue.js */ "./js/products.vue.js");
-/* harmony import */ var _node_modules_bootstrap_carousel_modal_carousel_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../node_modules/bootstrap-carousel-modal/carousel.js */ "./node_modules/bootstrap-carousel-modal/carousel.js");
+/* harmony import */ var _node_modules_image_gallery_overlay_build_js_carousel_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../node_modules/image-gallery-overlay/build/js/carousel.js */ "./node_modules/image-gallery-overlay/build/js/carousel.js");
 // products page for Williams-Sonoma Coding Challenge
 
 
@@ -130,8 +130,9 @@ function handleProductClick(evt) {
   var imgHrefs = thisProduct.images.map(function (image) {
     return image.href;
   });
-  carousel.populate(thisProduct.name, imgHrefs);
-  carousel.show();
+  carousel.populate(thisProduct.name, imgHrefs).then(function () {
+    carousel.show();
+  });
 } // add all products in prodstore to Vue model
 
 
@@ -209,7 +210,7 @@ function pageInit() {
 function initPageOnWindowLoad() {
   window.addEventListener('load', function () {
     // install the overlay carousel
-    carousel = new _node_modules_bootstrap_carousel_modal_carousel_js__WEBPACK_IMPORTED_MODULE_2__["default"]({
+    carousel = new _node_modules_image_gallery_overlay_build_js_carousel_js__WEBPACK_IMPORTED_MODULE_2__["default"]({
       thumbnailHoverOutline: '2px solid dodgerblue'
     });
     pageInit();
@@ -419,10 +420,10 @@ function WSIProductsVM(vmID) {
 
 /***/ }),
 
-/***/ "./node_modules/bootstrap-carousel-modal/CSSEditableProps.js":
-/*!*******************************************************************!*\
-  !*** ./node_modules/bootstrap-carousel-modal/CSSEditableProps.js ***!
-  \*******************************************************************/
+/***/ "./node_modules/image-gallery-overlay/build/js/CSSEditableProps.js":
+/*!*************************************************************************!*\
+  !*** ./node_modules/image-gallery-overlay/build/js/CSSEditableProps.js ***!
+  \*************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -430,6 +431,7 @@ function WSIProductsVM(vmID) {
 __webpack_require__.r(__webpack_exports__);
 // editable css props for carousel modal
 var CSSEditableProps = {
+  fontFamily: '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"',
   headerPadding: '0.25rem 1rem',
   headerParagraphMargin: '0',
   footerPadding: '0 1rem',
@@ -438,7 +440,7 @@ var CSSEditableProps = {
 
   /* must be in 'px' units */
   thumbnailImgHeight: '60px',
-  thumbnailImgHoverFilter: 'brightness(90%)',
+  thumbnailImgHoverFilter: 'brightness(70%) contrast(150%)',
   thumbnailBorder: 'none',
   thumbnailImgSelectedBorder: '1px solid #888',
   thumbnailSelectedOpacity: '60%',
@@ -448,48 +450,48 @@ var CSSEditableProps = {
 
 /***/ }),
 
-/***/ "./node_modules/bootstrap-carousel-modal/CSSTemplate.js":
-/*!**************************************************************!*\
-  !*** ./node_modules/bootstrap-carousel-modal/CSSTemplate.js ***!
-  \**************************************************************/
+/***/ "./node_modules/image-gallery-overlay/build/js/CSSTemplate.js":
+/*!********************************************************************!*\
+  !*** ./node_modules/image-gallery-overlay/build/js/CSSTemplate.js ***!
+  \********************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 // css template for carousel modal
-var CSSTemplate = "\n    .wsi-overlay {\n    }\n    \n    .wsi-overlay.modal-dialog {\n      margin: 0 auto;\n    }\n\n    .wsi-overlay .modal-header {\n      padding: {{headerPadding}};\n    }\n\n    .wsi-overlay .modal-header p {\n      margin: {{headerParagraphMargin}};\n    }\n\n    .wsi-overlay .modal-footer {\n      padding: {{footerPadding}};\n    }\n\n    .wsi-overlay .div-thumbnails {\n      overflow-x: auto;\n      white-space: nowrap;\n      margin: 0;\n      padding: 8px 16px 12px 16px; /* padding must be 'px' */\n      background-color: transparent;\n      scroll-behavior: smooth;\n    }\n    \n    .wsi-overlay .div-thumbnails button {\n      padding: {{thumbnailBtnPadding}};\n      margin: {{thumbnailBtnMargin}};\n      background-color: transparent;\n      border: none;\n    }\n    \n    .wsi-overlay .div-thumbnails button:focus {\n      outline: 2px solid dodgerblue;\n      filter: brightness(80%);\n    }\n    \n    .wsi-overlay .div-thumbnails img {\n      height: {{thumbnailImgHeight}};\n      width: auto;\n      margin: 0;\n      border: {{thumbnailBorder}};\n    }\n    \n    .wsi-overlay .div-thumbnails img:hover {\n      filter: {{thumbnailImgHoverFilter}};\n    }\n\n    .wsi-overlay .div-thumbnails img.selected {\n      cursor: default;\n      border: {{thumbnailImgSelectedBorder}};\n      opacity: {{thumbnailSelectedOpacity}};\n      filter: {{thumbnailSelectedFilter}};\n    }\n    \n    .carousel-container {\n      margin: 0;\n      position: relative;\n      width: 100%;\n     }\n     .carousel-hero {\n      position: absolute;\n      top: 0;\n      left: 0;\n      width: 100%;\n      height: auto;\n     }\n     .carousel-overlay {\n       position: absolute;\n       top: 0;\n       left: 0;\n       opacity: 0;\n       width: 100%;\n       height: auto;\n     }\n     .carousel-fade-in {\n       opacity: 1;\n       transition: opacity 1s;\n     }\n";
+var CSSTemplate = "\n    /* general */\n    #carousel-modal-container {\n      font-family: {{fontFamily}};\n    }\n\n    /* .cmodal */\n    #carousel-modal-container .cmodal {\n      position: fixed;\n      top: 0;\n      left: 0;\n      z-index: 1050;\n      width: 100%;\n      height: 100%;\n      overflow: hidden;\n      outline: 0;\n      pointer-events: none;\n    }\n    .cmodal-open #carousel-modal-container .cmodal {\n      overflow-x: hidden;\n      overflow-y: auto;\n    }\n    \n    /* .cmodal-dialog */\n    #carousel-modal-container .cmodal .cmodal-dialog {\n      position: relative;\n      width: auto;\n      margin: 0 auto;\n      pointer-events: none;\n      display: flex;\n      align-items: center;\n      min-height: calc(100% - 1rem);\n      opacity: 0;\n      transform: scale(0.95);\n      transition: all 1s ease;\n    }\n    #carousel-modal-container .cmodal.show .cmodal-dialog {\n     opacity: 1;\n     transform: scale(1.0);\n    }\n    @media (max-width: 475px) {\n      #carousel-modal-container .cmodal.show .cmodal-dialog {\n        max-width: 92vw !important;\n      }\n    }\n    \n    /* .cmodal-content */\n    #carousel-modal-container .cmodal-content {\n      position: relative;\n      display: flex;\n      flex-direction: column;\n      width: 100%;\n      pointer-events: auto;\n      background-color: #fff;\n      background-clip: padding-box;\n      border: 1px solid rgba(0,0,0,.2);\n      border-radius: 0.3rem;\n      outline: 0;\n    }\n    \n    /* .cmodal-header */\n    #carousel-modal-container .cmodal-header {\n      display: flex;\n      align-items: flex-start;\n      justify-content: space-between;\n      padding: {{headerPadding}};\n      border-bottom: 1px solid #dee2e6;\n      border-top-left-radius: calc(.3rem - 1px);\n      border-top-right-radius: calc(.3rem - 1px);\n    }\n    #carousel-modal-container .cmodal-header p {\n      margin: {{headerParagraphMargin}};\n    }\n    \n    /* .cmodal-body */\n    #carousel-modal-container .cmodal-body {\n      position: relative;\n      flex: 1 1 auto;\n      padding: 1rem;\n    }\n    \n    /* carousel */\n    #carousel-modal-container .carousel-container {\n      margin: 0;\n      position: relative;\n      width: 100%;\n     }\n     #carousel-modal-container .carousel-overlay-div {\n      position: absolute;\n      top: 0;\n      left: 0;\n      width: 100%;\n      height: 100%;\n      background-color: white;\n      opacity: 0;\n      pointer-events: none;\n     }\n     #carousel-modal-container .carousel-hero {\n      position: absolute;\n      top: 0;\n      left: 0;\n      width: 100%;\n      height: auto;\n     }\n     #carousel-modal-container .carousel-overlay {\n       position: absolute;\n       top: 0;\n       left: 0;\n       width: 100%;\n       height: auto;\n     }\n     #carousel-modal-container .carousel-fade-in {\n       opacity: 1;\n       transition: opacity 1s ease;\n     }\n    \n    /* cmodal-footer */\n    #carousel-modal-container .cmodal-footer {\n      display: flex;\n      flex-wrap: wrap;\n      align-items: center;\n      justify-content: flex-end;\n      padding: {{footerPadding}};\n      border-top: 1px solid #dee2e6;\n      border-bottom-right-radius: calc(.3rem - 1px);\n      border-bottom-left-radius: calc(.3rem - 1px);\n    }\n    #carousel-modal-container .div-thumbnails {\n      overflow-x: auto;\n      white-space: nowrap;\n      margin: 0;\n      padding: 8px 16px 12px 16px; /* padding must be 'px' */\n      background-color: transparent;\n      scroll-behavior: smooth;\n    }\n    #carousel-modal-container .div-thumbnails button {\n      padding: {{thumbnailBtnPadding}};\n      margin: {{thumbnailBtnMargin}};\n      background-color: transparent;\n      border: none;\n    }\n    #carousel-modal-container .div-thumbnails img {\n      height: {{thumbnailImgHeight}};\n      width: auto;\n      margin: 0;\n      border: {{thumbnailBorder}};\n    }\n    #carousel-modal-container .div-thumbnails img:hover {\n      filter: {{thumbnailImgHoverFilter}};\n    }\n    #carousel-modal-container .div-thumbnails img.selected {\n      cursor: default;\n      border: {{thumbnailImgSelectedBorder}};\n      opacity: {{thumbnailSelectedOpacity}};\n      filter: {{thumbnailSelectedFilter}};\n    }\n    \n    /* close button */\n    #carousel-modal-container button.close {\n      float: right;\n      font-size: 1.5rem;\n      font-weight: 700;\n      line-height: 1;\n      color: #000;\n      text-shadow: 0 1px 0 #fff;\n      padding: 1rem;\n      margin: -1rem -1rem -1rem auto;;\n      background-color: transparent;\n      border: 0;\n      opacity: .5;\n    }\n    #carousel-modal-container button.close:hover {\n      opacity: .8;\n    }\n    \n    /* cmodal-backdrop */\n    .cmodal-backdrop {\n      position: fixed;\n      top: 0;\n      left: 0;\n      z-index: 1040;\n      width: 100vw;\n      height: 100vh;\n      background-color: #000;\n      transition: opacity .3s linear;\n      opacity: 0;\n    }\n    .cmodal-backdrop.show {\n      opacity: 0.5;\n    }\n    \n    /* .cmodal-open */\n    .cmodal-open {\n      overflow: hidden;\n    }\n    \n    cmodal-open cmodal {\n      overflow-x: hidden;\n      overflow-y: auto;\n    }\n";
 /* harmony default export */ __webpack_exports__["default"] = (CSSTemplate);
 
 /***/ }),
 
-/***/ "./node_modules/bootstrap-carousel-modal/HTMLTemplate.js":
-/*!***************************************************************!*\
-  !*** ./node_modules/bootstrap-carousel-modal/HTMLTemplate.js ***!
-  \***************************************************************/
+/***/ "./node_modules/image-gallery-overlay/build/js/HTMLTemplate.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/image-gallery-overlay/build/js/HTMLTemplate.js ***!
+  \*********************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 // HTML template for carousel modal - a Bootstrap modal with an image carousel
-var HTMLTemplate = "\n  <div\n    id=\"carouselModal\"\n    tabindex=\"-1\"\n    class=\"modal fade\"\n    aria-modal=\"true\"\n    role=\"dialog\"\n    data-wrap=\"false\"\n  >\n    <div class=\"modal-dialog modal-dialog-centered wsi-overlay\">\n      <div class=\"modal-content\">\n      \n        <div class=\"modal-header\">\n          <p><!-- name of product --></p>\n          <button type=\"button\"\n            data-dismiss=\"modal\"\n            aria-label=\"Close\"\n            class=\"close\"\n          >\n            <span aria-hidden=\"true\">\xD7</span>\n          </button>\n        </div> <!-- /.modal-header -->\n        \n        <div class=\"modal-body\">\n          <div\n            id=\"carousel-container\"\n            class=\"carousel-container\"\n          >\n            <img\n              id=\"carousel-hero\"\n              class=\"carousel-hero\"\n              src=\"\"\n              alt=\"carousel hero\">\n            <img\n              id=\"carousel-overlay\"\n              class=\"carousel-overlay\"\n              alt=\"carousel overlay\"\n              data-in-transition=\"false\"\n              style=\"z-index: -1000\"\n              src=\"\"\n            >\n          </div> <!-- /.carousel-container -->\n        </div> <!-- /.modal-body -->\n\n        <div class=\"modal-footer\">\n          <div id=\"thumbnails-viewport\" class=\"div-thumbnails\"></div>\n        </div> <!-- /.modal-footer -->\n        \n      </div> <!-- /.modal-content -->\n    </div> <!-- /.modal-dialog -->\n  </div> <!-- /.modal -->\n";
+var HTMLTemplate = "\n  <div\n    id=\"carouselModal\"\n    tabindex=\"-1\"\n    class=\"cmodal\"\n    data-wrap=\"false\"\n    style=\"display: none\"\n  >\n    <div\n      class=\"cmodal-dialog cmodal-dialog-centered\"\n      style=\"max-width: calc(-2rem + 58vh)\"\n    >\n      <div class=\"cmodal-content\">\n      \n        <div class=\"cmodal-header\">\n          <p><!-- name of product --></p>\n          <button type=\"button\"\n            aria-label=\"Close\"\n            class=\"close\"\n          >\n            <span aria-hidden=\"true\">\xD7</span>\n          </button>\n        </div> <!-- /.cmodal-header -->\n        \n        <div class=\"cmodal-body\">\n          <div\n            id=\"carousel-container\"\n            class=\"carousel-container\"\n            data-aspect-ratio=\"0.6666667\"\n            style=\"padding-bottom: 150%\"\n          >\n            <img\n              id=\"carousel-hero\"\n              class=\"carousel-hero\"\n              src=\"\"\n              alt=\"carousel hero\">\n            <!-- .carousel-overlay-div -->\n            <div\n              class=\"carousel-overlay-div\"\n              data-in-transition=\"false\"\n            >\n              <img\n                id=\"carousel-overlay\"\n                class=\"carousel-overlay\"\n                alt=\"carousel overlay\"\n                src=\"\"\n              >\n            </div> <!-- /.carousel-overlay-div -->\n          </div> <!-- /.carousel-container -->\n        </div> <!-- /.cmodal-body -->\n\n        <div class=\"cmodal-footer\">\n          <div id=\"thumbnails-viewport\" class=\"div-thumbnails\"></div>\n        </div> <!-- /.cmodal-footer -->\n        \n      </div> <!-- /.cmodal-content -->\n    </div> <!-- /.cmodal-dialog -->\n  </div> <!-- /.cmodal -->\n  <div class=\"cmodal-backdrop\" style=\"display: none\"></div>\n";
 /* harmony default export */ __webpack_exports__["default"] = (HTMLTemplate);
 
 /***/ }),
 
-/***/ "./node_modules/bootstrap-carousel-modal/carousel.js":
-/*!***********************************************************!*\
-  !*** ./node_modules/bootstrap-carousel-modal/carousel.js ***!
-  \***********************************************************/
+/***/ "./node_modules/image-gallery-overlay/build/js/carousel.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/image-gallery-overlay/build/js/carousel.js ***!
+  \*****************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _CSSTemplate_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CSSTemplate.js */ "./node_modules/bootstrap-carousel-modal/CSSTemplate.js");
-/* harmony import */ var _CSSEditableProps_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CSSEditableProps.js */ "./node_modules/bootstrap-carousel-modal/CSSEditableProps.js");
-/* harmony import */ var _HTMLTemplate_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./HTMLTemplate.js */ "./node_modules/bootstrap-carousel-modal/HTMLTemplate.js");
+/* harmony import */ var _CSSTemplate_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CSSTemplate.js */ "./node_modules/image-gallery-overlay/build/js/CSSTemplate.js");
+/* harmony import */ var _CSSEditableProps_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CSSEditableProps.js */ "./node_modules/image-gallery-overlay/build/js/CSSEditableProps.js");
+/* harmony import */ var _HTMLTemplate_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./HTMLTemplate.js */ "./node_modules/image-gallery-overlay/build/js/HTMLTemplate.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -512,25 +514,28 @@ function OverlayCarousel(userEditsToCSSProps) {
   var editableCSSProps = JSON.parse(JSON.stringify(_CSSEditableProps_js__WEBPACK_IMPORTED_MODULE_1__["default"]));
   var styleSheet = _CSSTemplate_js__WEBPACK_IMPORTED_MODULE_0__["default"].slice(0);
   var carouselModal,
-      jqCarouselModal,
+      modalBackdrop,
       modalDialog,
       modalContent,
       modalHeader,
       pHeader,
+      closeButton,
       modalBody,
       carouselContainer,
       imgHero,
       imgOverlay,
+      overlayDiv,
       thumbnailsViewport,
       thumbnailImages = [],
-      modalFooter; // returns true if element supports smooth scrolling
+      modalFooter,
+      modalIsShowing = false; // returns true if element supports smooth scrolling
 
-  var hasSmoothScrolling = function hasSmoothScrolling(el) {
+  var _hasSmoothScrolling = function _hasSmoothScrolling(el) {
     return getComputedStyle(el).scrollBehavior === 'smooth';
   }; // apply user edits to editable css props
 
 
-  function applyUserEditsToCSSProps() {
+  function _applyUserEditsToCSSProps() {
     if (typeof userEditsToCSSProps === 'undefined') {
       return;
     }
@@ -549,7 +554,7 @@ function OverlayCarousel(userEditsToCSSProps) {
   } // apply all css props to styleSheet
 
 
-  function applyCSSPropsToStyleSheet() {
+  function _applyCSSPropsToStyleSheet() {
     for (var _i2 = 0, _Object$entries2 = Object.entries(editableCSSProps); _i2 < _Object$entries2.length; _i2++) {
       var _Object$entries2$_i = _slicedToArray(_Object$entries2[_i2], 2),
           propName = _Object$entries2$_i[0],
@@ -562,146 +567,63 @@ function OverlayCarousel(userEditsToCSSProps) {
   } // append HTML template to <body>
 
 
-  function appendHTMLTemplateToBody() {
+  function _appendHTMLTemplateToBody() {
     var div = document.createElement('div');
     div.id = "carousel-modal-container";
     div.innerHTML = _HTMLTemplate_js__WEBPACK_IMPORTED_MODULE_2__["default"];
     document.body.appendChild(div);
     carouselModal = document.getElementById('carouselModal');
-    jqCarouselModal = $('#carouselModal');
-    modalDialog = document.querySelector('.modal-dialog');
-    modalContent = document.querySelector('.modal-content');
-    modalHeader = document.querySelector('.modal-header');
-    pHeader = carouselModal.querySelector('.modal-header p');
-    modalBody = carouselModal.querySelector('.wsi-overlay .modal-body');
+    modalBackdrop = document.querySelector('.cmodal-backdrop');
+    modalDialog = document.querySelector('.cmodal-dialog');
+    modalContent = document.querySelector('.cmodal-content');
+    modalHeader = document.querySelector('.cmodal-header');
+    pHeader = carouselModal.querySelector('.cmodal-header p');
+    closeButton = modalHeader.querySelector('button.close');
+    modalBody = carouselModal.querySelector('.cmodal-body');
     carouselContainer = document.getElementById('carousel-container');
     imgHero = document.getElementById('carousel-hero');
     imgOverlay = document.getElementById('carousel-overlay');
+    overlayDiv = document.querySelector('.carousel-overlay-div');
     thumbnailsViewport = document.getElementById('thumbnails-viewport');
-    modalFooter = carouselModal.querySelector('.modal-footer'); // set up the image fade
+    modalFooter = carouselModal.querySelector('.cmodal-footer'); // set up the overlay fader
 
-    imgOverlay.addEventListener('transitionend', completeImageFade); // react to hero image changes
+    overlayDiv.addEventListener('transitionend', _completeImageFade); // react to hero image changes
 
     imgHero.addEventListener('change', function () {
       var heroIndex = Number(imgHero.dataset.index); // set (unset) the selected class for each thumbnail image
 
-      var thumbSelected = updateThumbnailsSelectedClass(thumbnailImages, heroIndex); // scroll the thumbnails container
+      var thumbSelected = _updateThumbnailsSelectedClass(thumbnailImages, heroIndex); // scroll the thumbnails container
 
-      scrollThumbnailsViewport(thumbSelected);
+
+      _scrollThumbnailsViewport(thumbSelected);
     });
   } // append style sheet to <head>
 
 
-  function appendStyleSheetToHead() {
+  function _appendStyleSheetToHead() {
     var style = document.createElement('style');
     style.innerHTML = styleSheet;
+    style.id = 'carousel-style';
     document.head.appendChild(style);
-  } // populate overlay with name, carousel and thumbnail images
-
-
-  function populate(name, hrefs) {
-    // console.log('populate()')
-    // display the modal (invisibly) to obtain its dimensions
-    carouselModal.style.display = 'block';
-    pHeader.innerHTML = name; // detect aspect ratio of image when it's loaded
-
-    var imagesLoaded = 0;
-    var aspectRatioMin = Infinity;
-
-    function evalLoadedImage() {
-      var img = this;
-      var aspectRatio;
-      imagesLoaded++;
-
-      if (img.width === 0 || img.height === 0) {
-        return;
-      }
-
-      aspectRatio = img.width / img.height;
-      img.dataset.aspectRatio = aspectRatio;
-      aspectRatioMin = aspectRatio < aspectRatioMin ? aspectRatio : aspectRatioMin; // console.log(`index: ${img.dataset.index}, aspectRatio: ${aspectRatio}, min: ${aspectRatioMin}`);
-
-      if (imagesLoaded < hrefs.length) {
-        return;
-      }
-
-      if (aspectRatioMin === Infinity) {
-        return;
-      } // all images loaded: set the padding-bottom of container to match aspect
-      // ratio
-
-
-      carouselContainer.style.paddingBottom = Math.round(1.0 / aspectRatioMin * 100) + '%';
-      carouselContainer.dataset.aspectRatio = String(aspectRatioMin);
-      var contentAspectRatio = modalContent.offsetWidth / modalContent.offsetHeight;
-      modalDialog.style.maxWidth = "calc(".concat(Math.round(contentAspectRatio * 100), "vh - 2rem)"); // console.log(`  modalContent.offsetWidth: ${modalContent.offsetWidth}
-      //   modalContent.offsetHeight: ${modalContent.offsetHeight}
-      //   aspectRatioMin: ${aspectRatioMin}
-      //   contentAspectRatio: ${contentAspectRatio}
-      //   modalDialog.style.maxWidth: ${modalDialog.style.maxWidth}`);
-      // un-display the modal
-
-      carouselModal.style.display = "none";
-    } // populate the thumbnails
-
-
-    thumbnailsViewport.innerHTML = '';
-    thumbnailImages = hrefs.map(function (href, index) {
-      var btnThumb = document.createElement('button');
-      thumbnailsViewport.appendChild(btnThumb);
-      var imgThumb = document.createElement('img');
-      imgThumb.onload = evalLoadedImage;
-      imgThumb.dataset.index = index;
-      imgThumb.src = href;
-      btnThumb.appendChild(imgThumb);
-      return imgThumb;
-    }); // show thumbnails when there are multiple images
-
-    var hasMultipleImages = hrefs.length > 1;
-    modalFooter.style.display = hasMultipleImages ? '' : 'none';
-  } // show the carousel modal
-
-
-  function show() {
-    imgOverlay.dataset.inTransition = "false"; // make the display changes *before* showing the modal
-
-    var firstThumb = thumbnailsViewport.querySelector('img');
-
-    if (firstThumb === null) {
-      console.error('no thumbnail images found');
-      return;
-    }
-
-    displaySelectedImage(firstThumb, false);
-    jqCarouselModal.modal('show');
   }
   /**
    * display in hero image the selected thumbnail image
-   * @param {Element} thumbnailImg
+   * @param {HTMLImageElement} thumbnailImg
    * @param {boolean} animate - animate the hero image transition
    */
 
 
-  function displaySelectedImage(thumbnailImg) {
+  function _displaySelectedImage(thumbnailImg) {
     var animate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
 
-    // console.log(`displaySelectedImage(imgIndex=${thumbnailImg.dataset.index},` +
+    // console.log(`_displaySelectedImage(imgIndex=${thumbnailImg.dataset.index},` +
     // ` animate=${animate})`);
-    // don't change hero image if it is still in transition from an
+    // don't animate if overlay is still in transition from an
     // earlier change
-    if (imgOverlay.dataset.inTransition === "true") {
-      console.error('hero image in transition, cannot change now');
-      return;
-    } // don't animate transition if image's aspect ratio is greater than the
-    // current hero image's
-
-
-    var aspectRatioMismatch = function aspectRatioMismatch(img) {
-      return +img.dataset.aspectRatio > +imgHero.dataset.aspectRatio;
-    };
-
-    if (aspectRatioMismatch(thumbnailImg)) {
-      console.log('displaySelectedImage aspect ratio mismatch, no animation');
+    if (overlayDiv.dataset.inTransition === "true") {
+      // console.log('overlay in transition, disabling fade');
+      overlayDiv.dataset.inTransition = "false";
+      overlayDiv.classList.remove('carousel-fade-in');
       animate = false;
     } // dispatch 'change' event to hero image, which will update thumbnails
 
@@ -709,44 +631,68 @@ function OverlayCarousel(userEditsToCSSProps) {
     imgHero.dataset.index = thumbnailImg.dataset.index;
     var changeEvt = new Event('change');
     imgHero.dispatchEvent(changeEvt);
-    imgOverlay.src = thumbnailImg.src;
+    Object.assign(imgOverlay, {
+      src: thumbnailImg.src,
+      alt: thumbnailImg.alt,
+      title: thumbnailImg.title
+    });
     imgOverlay.dataset.index = thumbnailImg.dataset.index;
-    imgOverlay.dataset.aspectRatio = thumbnailImg.dataset.aspectRatio;
 
-    if (animate) {
-      // bring overlay to front and fade it in
-      imgOverlay.dataset.inTransition = "true";
-      imgOverlay.style.zIndex = "100";
-      imgOverlay.classList.add('carousel-fade-in');
-    } else {
+    if (animate === false) {
       // just clean up without animation
-      completeImageFade();
-    }
+      _completeImageFade();
+
+      return;
+    } // fade in overlay
+    // console.log('_displaySelectedImage fading in overlay');
+
+
+    _imageInTransition = true;
+    overlayDiv.dataset.inTransition = 'true';
+    overlayDiv.classList.add('carousel-fade-in'); // add timeout in case 'transitionend' event is never received
+
+    setTimeout(function () {
+      if (_imageInTransition === false) {
+        return;
+      } // console.log('_displaySelectedImage transitionend timeout, calling' +
+      //   ' _completeImageFade()');
+
+
+      _completeImageFade();
+    }, 1100);
   } // clean up display elements when image fade transition completes
 
 
-  function completeImageFade() {
-    // console.log('completeImageFade()');
-    // copy overlay image to hero image
-    imgHero.src = imgOverlay.src;
-    imgHero.dataset.index = imgOverlay.dataset.index;
-    imgHero.dataset.aspectRatio = imgOverlay.dataset.aspectRatio; // send overlay to back and clean up (delayed to prevent flash)
+  var _imageInTransition = false;
+
+  function _completeImageFade() {
+    // console.log('_completeImageFade() _imageInTranstion:', _imageInTransition);
+    _imageInTransition = false;
+    overlayDiv.dataset.inTransition = "false"; // copy overlay image to hero image
+
+    if (imgOverlay.src) {
+      Object.assign(imgHero, {
+        src: imgOverlay.src,
+        alt: imgOverlay.alt,
+        title: imgOverlay.title
+      });
+      imgHero.dataset.index = imgOverlay.dataset.index;
+    } // clean up overlay (delayed to prevent UI flash)
+
 
     setTimeout(function () {
-      imgOverlay.style.zIndex = "-1000";
-      imgOverlay.src = "";
-      imgOverlay.dataset.index = null;
-      imgOverlay.dataset.inTransition = "false";
-      imgOverlay.dataset.aspectRatio = "0";
-
-      if (imgOverlay.classList.contains('carousel-fade-in')) {
-        imgOverlay.classList.remove('carousel-fade-in');
-      }
-    }, 200);
+      Object.assign(imgOverlay, {
+        src: "",
+        alt: "",
+        title: ""
+      });
+      imgOverlay.removeAttribute('data-index');
+      overlayDiv.classList.remove('carousel-fade-in');
+    }, 250);
   } // enter key press over thumbnail button emit thumbnail image click
 
 
-  function listenForEnterKeyOverButton() {
+  function _listenForEnterKeyOverButton() {
     thumbnailsViewport.addEventListener('keydown', function (e) {
       if (e.key !== 'Enter') {
         return;
@@ -766,10 +712,10 @@ function OverlayCarousel(userEditsToCSSProps) {
 
       btnImg.click();
     });
-  } // respond to clicks on thumbnail images inside 'div-thumbnails'
+  } // respond to clicks on thumbnail images
 
 
-  function listenForThumbnailImageClicks() {
+  function _listenForThumbnailImageClicks() {
     thumbnailsViewport.addEventListener('click', function (evt) {
       var elClicked = evt.target;
 
@@ -781,12 +727,53 @@ function OverlayCarousel(userEditsToCSSProps) {
         return;
       }
 
-      displaySelectedImage(elClicked);
+      _displaySelectedImage(elClicked);
+    });
+  }
+
+  function _hideModal() {
+    // console.log('_hideModal()');
+    if (modalIsShowing === false) {
+      return;
+    }
+
+    modalIsShowing = false;
+    modalBackdrop.addEventListener('transitionend', function () {
+      modalBackdrop.style.display = 'none';
+    }, {
+      once: true
+    });
+    carouselModal.addEventListener('transitionend', function () {
+      carouselModal.style.display = 'none';
+    }, {
+      once: true
+    });
+    modalBackdrop.classList.remove('show');
+    carouselModal.classList.remove('show');
+    document.body.classList.remove('cmodal-open');
+  } // respond to clicks on close button
+
+
+  function _listenForCloseModalEvents() {
+    closeButton.addEventListener('click', function (evt) {
+      // console.log('close button click');
+      _hideModal();
+    });
+    modalBackdrop.addEventListener('click', function () {
+      // console.log('modalBackdrop click');
+      _hideModal();
+    }); // ESC key
+
+    document.addEventListener('keyup', function (evt) {
+      if (evt.key === 'Escape') {
+        // console.log('ESC key pressed');
+        _hideModal();
+      }
     });
   } // update the "selected" class of each thumbnail image
 
 
-  function updateThumbnailsSelectedClass(thumbnails, carouselIndex) {
+  function _updateThumbnailsSelectedClass(thumbnails, carouselIndex) {
     var cIndex = Number(carouselIndex);
     var thumbSelected = null;
     thumbnails.forEach(function (img) {
@@ -801,14 +788,43 @@ function OverlayCarousel(userEditsToCSSProps) {
       img.classList.remove('selected');
     });
     return thumbSelected;
+  } // scroll viewport using vanilla JavaScript
+
+
+  function _vpScrollJavaScript(scrollDest) {
+    // simulate scroll feature with vanilla JavaScript
+    var timeStep = 20;
+    var timeTotal = 400;
+    var stepsTotal = Math.round(timeTotal / timeStep);
+    var scrollStart = thumbnailsViewport.scrollLeft;
+    var scrollTotal = scrollDest - scrollStart;
+    var scrollStep = Math.round(scrollTotal / stepsTotal);
+    var time = timeStep,
+        scroll = scrollStart + scrollStep;
+
+    var _scrollRecursive = function _scrollRecursive() {
+      if (time >= timeTotal) {
+        thumbnailsViewport.scrollLeft = scrollDest;
+        return;
+      }
+
+      thumbnailsViewport.scrollLeft = scroll;
+      time += timeStep;
+      scroll += scrollStep;
+      setTimeout(_scrollRecursive, timeStep);
+    };
+
+    if (scrollTotal !== 0) {
+      _scrollRecursive();
+    }
   }
   /**
    * scroll thumbnails viewport to show `thumbnailImg` in center of window
-   * @param {Element} thumbnailImg - thumbnail's img element
+   * @param {HTMLImageElement} thumbnailImg - thumbnail's img element
    */
 
 
-  function scrollThumbnailsViewport(thumbnailImg) {
+  function _scrollThumbnailsViewport(thumbnailImg) {
     if (!thumbnailImg) {
       return;
     }
@@ -843,50 +859,145 @@ function OverlayCarousel(userEditsToCSSProps) {
     } // console.log(`  newScrollLeft: ${newScrollLeft}`);
 
 
-    if (hasSmoothScrolling(thumbnailsViewport)) {
+    if (_hasSmoothScrolling(thumbnailsViewport)) {
       // console.log('scrolling with Element.scrollLeft = newScrollLeft');
       thumbnailsViewport.scrollLeft = newScrollLeft;
     } else {
-      // simulate scroll feature with vanilla JavaScript
-      var timeStep = 20;
-      var timeTotal = 400;
-      var stepsTotal = Math.round(timeTotal / timeStep);
-      var scrollStart = thumbnailsViewport.scrollLeft;
-      var scrollTotal = newScrollLeft - scrollStart;
-      var scrollStep = Math.round(scrollTotal / stepsTotal);
-      var time = timeStep,
-          scroll = scrollStart + scrollStep;
-
-      var step = function step() {
-        if (time >= timeTotal) {
-          thumbnailsViewport.scrollLeft = newScrollLeft;
-          return;
-        }
-
-        thumbnailsViewport.scrollLeft = scroll;
-        time += timeStep;
-        scroll += scrollStep;
-        setTimeout(step, timeStep);
-      };
-
-      if (scrollTotal !== 0) {
-        step();
-      }
+      _vpScrollJavaScript(newScrollLeft);
     } // console.log(`after scrollLeft: ${thumbnailsViewport.scrollLeft}`);
 
   }
+  /**
+   * populate overlay with name, carousel and thumbnail images
+   * @param name
+   * @param hrefs
+   * @param titles
+   * @return {Promise<unknown>}
+   */
 
-  function init() {
-    applyUserEditsToCSSProps();
-    applyCSSPropsToStyleSheet();
-    appendHTMLTemplateToBody();
-    appendStyleSheetToHead();
-    listenForThumbnailImageClicks();
-    listenForEnterKeyOverButton();
+
+  function populate(name, hrefs) {
+    var titles = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+    // console.log(`populate()`);
+    return new Promise(function (resolve) {
+      // display the modal (invisibly) to obtain its dimensions
+      var displaySave = carouselModal.style.display;
+      carouselModal.style.display = 'block';
+      pHeader.innerHTML = name; // detect aspect ratio of image when it receives a 'load' event
+
+      var imagesLoaded = 0;
+      var aspectRatioMin = Infinity;
+
+      function _evalLoadedImage() {
+        var img = this;
+        var aspectRatio;
+        imagesLoaded++;
+
+        if (img.width === 0 || img.height === 0) {
+          return;
+        }
+
+        aspectRatio = img.width / img.height;
+        img.dataset.aspectRatio = aspectRatio;
+        aspectRatioMin = aspectRatio < aspectRatioMin ? aspectRatio : aspectRatioMin; // console.log(`_evalLoadedImage index: ${img.dataset.index}, aspectRatio: ${aspectRatio}, min: ${aspectRatioMin}`);
+
+        if (imagesLoaded < hrefs.length) {
+          return;
+        }
+
+        if (aspectRatioMin === Infinity) {
+          return;
+        } // all images loaded: set the padding-bottom of container to match aspect
+        // ratio
+
+
+        carouselContainer.style.paddingBottom = Math.round(1.0 / aspectRatioMin * 100) + '%';
+        carouselContainer.dataset.aspectRatio = String(aspectRatioMin);
+        var contentAspectRatio = modalContent.offsetWidth / modalContent.offsetHeight;
+        modalDialog.style.maxWidth = "calc(-30px + ".concat(Math.round(contentAspectRatio * 100), "vh)"); // un-display the modal
+
+        carouselModal.style.display = displaySave; // all done, resolve the promise
+
+        resolve();
+      } // populate the thumbnails
+
+
+      thumbnailsViewport.innerHTML = '';
+      thumbnailImages = hrefs.map(function (href, index) {
+        var btnThumb = document.createElement('button');
+        thumbnailsViewport.appendChild(btnThumb);
+        var imgThumb = document.createElement('img');
+        imgThumb.onload = _evalLoadedImage;
+        imgThumb.dataset.index = String(index);
+        imgThumb.src = href;
+
+        if (titles !== null) {
+          imgThumb.alt = imgThumb.title = titles[index];
+        }
+
+        btnThumb.appendChild(imgThumb);
+        return imgThumb;
+      }); // show thumbnails when there are multiple images
+
+      var hasMultipleImages = hrefs.length > 1;
+      modalFooter.style.display = hasMultipleImages ? '' : 'none';
+    });
+  } // show the carousel modal
+
+
+  function show() {
+    // console.log('show()');
+    if (modalIsShowing) {
+      return;
+    }
+
+    overlayDiv.dataset.inTransition = "false"; // make the display changes *before* showing the modal
+
+    var firstThumb = thumbnailsViewport.querySelector('img');
+
+    if (firstThumb === null) {
+      console.error('no thumbnail images found');
+      return;
+    }
+
+    _displaySelectedImage(firstThumb, false); // wait for backdrop to complete before showing modal
+    // modalBackdrop.addEventListener('transitionend', () => {
+    //     carouselModal.classList.add('show');
+    //     document.body.classList.add('cmodal-open');
+    //     modalIsShowing = true;
+    //   }, { once: true }
+    // );
+
+
+    modalBackdrop.style.display = 'block';
+    carouselModal.style.display = 'block';
+    setTimeout(function () {
+      carouselModal.classList.add('show');
+      modalBackdrop.classList.add('show');
+      document.body.classList.add('cmodal-open');
+      modalIsShowing = true;
+    }, 200);
+  }
+
+  function _init() {
+    _applyUserEditsToCSSProps();
+
+    _applyCSSPropsToStyleSheet();
+
+    _appendStyleSheetToHead();
+
+    _appendHTMLTemplateToBody();
+
+    _listenForThumbnailImageClicks();
+
+    _listenForEnterKeyOverButton();
+
+    _listenForCloseModalEvents();
   } // initialize
 
 
-  init();
+  _init();
+
   return {
     populate: populate,
     show: show
