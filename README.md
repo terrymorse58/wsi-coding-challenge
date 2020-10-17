@@ -15,7 +15,7 @@ Display all products on a multi-column, responsive, accessible, and attractive
    layout")
 
 
-#### Technology Dependencies ####
+#### Technologies Used ####
 
  Name                      | Version | Usage
 -------------------------- | ------- | -----
@@ -23,13 +23,13 @@ Display all products on a multi-column, responsive, accessible, and attractive
  Bootstrap                 | 4.5.2   | production
  jQuery                    | 3.5.1   | production
  popper.js                 | 1.16.1  | production 
- bootstrap-carousel-modal* | 1.1.3   | production
- jest                      | 26.4.2  | test
- babel                     | 7.11.6  | test, build
- webpack                   | 4.44.2  | build
- postCSS                   | 8.1.0   | build
+ image-gallery-overlay*    | 1.3.1   | production
+ jest                      | 26.5.3  | dev test
+ babel                     | 7.12.3  | dev test/build
+ webpack                   | 4.44.2  | dev build
+ postCSS                   | 8.1.1   | dev build
  
-* – an internally developed package
+* image-gallery-overlay - an internally developed custom web component
 
 #### Installation ####
 
@@ -45,8 +45,8 @@ be run here:
  
 [WSI Coding Challenge @ terrymorse.com](https://terrymorse.com/private/wsicodechallenge/index.html)
 
-Or the development version can be run locally using lite-server, which was
- installed above:
+Or the development version can be run locally
+:
 ```text
 npm run dev
 ```
@@ -70,9 +70,8 @@ npm run test
 
 #### Responsive Design ####
 
-![iPhone responsive layout](https://terrymorse.com/public/wsicc-iphone.png "3
--column
- layout")
+![iPhone responsive layout](https://terrymorse.com/public/wsicc-iphone.png "1
+-column layout")
 
 
 The page layout and dimensions of the product cards are responsive to viewport
@@ -89,6 +88,8 @@ horizontally centered product cards.
  
 On viewports narrower than 396 pixels, the product cards shrink in size
  to fit the viewport width.
+ 
+The image gallery overlay is responsive to viewport width and height.
 
 #### Accessibility Design ####
 
@@ -98,19 +99,19 @@ On viewports narrower than 396 pixels, the product cards shrink in size
 To permit page navigtion without a pointing device, navigation is
  supported using `tab`, `enter`, and `esc` keys.
 
-Pressing `tab` key sets the focus on the next product card's image, and an
+Pressing the `tab` key sets the focus on the next product card's image, and an
  outline indicates which card image has focus. Pressing `esc` removes
  focus from the product image.
 
 When a product card's image has focus, the `enter` key opens an
  overlay which displays a carousel of product images.
  
-When the overlay is displayed, `esc` closes it and returns
+When the overlay image gallery is displayed, `esc` closes it and returns
  focus to the product card image.
 
 #### Styling ####
 
-Styling is set in `wsiprods.css`. To permit easy changes to the apperance,
+Styling is managed in `wsiprods.css`. To permit easy changes to the apperance,
 this file uses CSS custom properties (variables) for all the significant
  styles:
   
@@ -135,9 +136,12 @@ body {
 }
 ```
 
+For browser compantibility, the build version replaces CSS custom properties
+ with static values. 
+
 #### Testimonial ####
 
-This project was written entirely by me, Terry Morse, without outside
+This project was written entirely by me, Terry Morse, with no outside
  assistance.
  
 Your comments or questions are welcome at
