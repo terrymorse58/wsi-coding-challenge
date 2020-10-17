@@ -29,7 +29,7 @@ Display all products on a multi-column, responsive, accessible, and attractive
  webpack                   | 4.44.2  | dev build
  postCSS                   | 8.1.1   | dev build
  
-* image-gallery-overlay - an internally developed custom web component
+* [image-gallery-overlay](https://github.com/terrymorse58/image-gallery-overlay) - an internally developed custom web component
 
 #### Installation ####
 
