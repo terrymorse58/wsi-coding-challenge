@@ -22,6 +22,7 @@
 
 .wsi-card:hover {
   filter: drop-shadow(0 0 4px rgba(0,0,0,0.4));
+  transform: scale(1.015);
 }
 
 .wsi-card .card-body {

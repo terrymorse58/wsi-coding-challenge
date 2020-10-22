@@ -11,6 +11,7 @@
   --wsi-card-background-color: #fff;
   --wsi-card-border: 1px solid rgba(0,0,0,0.125);
   --wsi-card-hover-filter: drop-shadow(0 0 4px rgba(0,0,0,0.4));
+  --wsi-card-hover-transform: scale(1.015);
   --wsi-card-img-focus-outline: 3px solid rgba(0,0,100,0.3);
   --wsi-card-flex-direction: row;
   --wsi-price-font-weight: 600;
@@ -38,6 +39,7 @@
 
 .wsi-card:hover {
   filter: var(--wsi-card-hover-filter);
+  transform: var(--wsi-card-hover-transform);
 }
 
 .wsi-card .card-body {
