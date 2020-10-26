@@ -1,4 +1,3 @@
-
 /* modify wsi styling here */
 
 .wsi-body {
@@ -18,11 +17,14 @@
   background-color: #fff;
   border: 1px solid rgba(0,0,0,0.125);
   flex-direction: row;
+  transition: scale .3s ease, box-shadow .2s ease;
 }
 
 .wsi-card:hover {
-  filter: drop-shadow(0 0 4px rgba(0,0,0,0.4));
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+  0 6px 20px 0 rgba(0, 0, 0, 0.19);
   transform: scale(1.015);
+  transition: scale .4s ease, box-shadow .2s ease;
 }
 
 .wsi-card .card-body {
@@ -30,7 +32,7 @@
 }
 
 .wsi-card img:focus {
-  outline: 3px solid rgba(0,0,100,0.3);
+  outline: 3px solid rgba(30,144,255,0.5);
 }
 
 .wsi-card .card-text {
