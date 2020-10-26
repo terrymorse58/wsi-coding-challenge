@@ -23,7 +23,7 @@ Display all products on a multi-column, responsive, accessible, and attractive
  Bootstrap                 | 4.5.2   | production
  jQuery                    | 3.5.1   | production
  popper.js                 | 1.16.1  | production 
- image-gallery-overlay*    | 1.3.1   | production
+ image-gallery-overlay*    | 1.3.2   | production
  jest                      | 26.5.3  | dev test
  babel                     | 7.12.3  | dev test/build
  webpack                   | 4.44.2  | dev build
@@ -117,22 +117,24 @@ this file uses CSS custom properties (variables) for all the significant
   
 ```css
 /* modify wsi styling here */
-body {
-  --wsi-body-background-color: #f0f0f0;
-  --wsi-container-background-color: #fff;
-  --wsi-container-outline: 1px solid #bbb;
-  --wsi-card-margin: 1rem 0.5rem;
-  --wsi-card-width: 354px;
-  --wsi-card-text-size: 0.85rem;
-  --wsi-card-line-height: 1.2;
-  --wsi-card-background-color: #fff;
-  --wsi-card-border: 1px solid rgba(0,0,0,0.125);
-  --wsi-card-hover-filter: drop-shadow(0 0 4px rgba(0,0,0,0.4));
-  --wsi-card-img-focus-outline: 3px solid rgba(0,0,100,0.3);
-  --wsi-card-flex-direction: row;
-  --wsi-price-font-weight: 600;
-  --wsi-sale-text-color: red;
-  --wsi-overlay-max-width: 400px;
+:root {
+    --wsi-body-background-color: #f0f0f0;
+    --wsi-container-background-color: #fff;
+    --wsi-container-outline: 1px solid #bbb;
+    --wsi-card-margin: 1rem 0.5rem;
+    --wsi-card-width: 354px;
+    --wsi-card-text-size: 0.85rem;
+    --wsi-card-line-height: 1.2;
+    --wsi-card-background-color: #fff;
+    --wsi-card-border: 1px solid rgba(0,0,0,0.125);
+    --wsi-card-hover-filter: drop-shadow(0 0 4px rgba(0,0,0,0.4));
+    --wsi-card-hover-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+      0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    --wsi-card-hover-transform: scale(1.015);
+    --wsi-card-img-focus-outline: 3px solid rgba(30,144,255,0.5);
+    --wsi-card-flex-direction: row;
+    --wsi-price-font-weight: 600;
+    --wsi-sale-text-color: red;
 }
 ```
 
