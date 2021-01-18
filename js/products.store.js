@@ -33,7 +33,7 @@ function WSIProdStore (url) {
 
   /**
    * read products from JSON file
-   * @return {Promise<boolean>}
+   * @return {Promise<boolean>} - true upon success
    */
   function readProducts () {
     return fetchJSON(jsonURL)

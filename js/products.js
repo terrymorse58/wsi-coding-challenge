@@ -10,7 +10,7 @@ const PRODUCTS_URL = productsJsonUrl(JSON_FILE_NAME);
 const prodStore = new WSIProdStore(PRODUCTS_URL);
 const prodVM = WSIProductsVM('productsvm');
 
-// forn the URL to the products json file
+// form the URL to the products json file
 // assumption: json file is stored in same path as web page
 function productsJsonUrl (fileName) {
   const pathMinusFile = location.pathname.substring(0,
